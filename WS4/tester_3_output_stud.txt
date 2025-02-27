@@ -1,0 +1,3673 @@
+Script started on Fri 06 Dec 2024 12:14:42 AM EST
+==161422== Memcheck, a memory error detector
+==161422== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==161422== Using Valgrind-3.21.0 and LibVEX; rerun with -h for copyright info
+==161422== Command: ws_tester_3 Stations1.txt Stations2.txt CustomerOrders.txt AssemblyLine.txt
+==161422== 
+[38;5;9mBegin Testing the Program!
+--------------------------[0m
+
+Command Line: ws_tester_3 Stations1.txt Stations2.txt CustomerOrders.txt AssemblyLine.txt
+
+========================================
+=         Stations (summary)           =
+========================================
+001 | Armchair       | 654321 | 
+002 | Bed            | 123456 | 
+003 | Dresser        | 056789 | 
+004 | Nighttable     | 000887 | 
+005 | Filing Cabinet | 987654 | 
+006 | Office Chair   | 147852 | 
+007 | Bookcase       | 000987 | 
+008 | Desk           | 459214 | 
+
+
+========================================
+=          Stations (full)             =
+========================================
+001 | Armchair       | 654321 |   10 | Upholstered Wing Chair
+002 | Bed            | 123456 |    5 | Queen size bed with headboard
+003 | Dresser        | 056789 |    7 | 6-Drawer Unit
+004 | Nighttable     | 000887 |    5 | Nightstand with 2 drawers
+005 | Filing Cabinet | 987654 |    5 | 3-drawer filing cabinet
+006 | Office Chair   | 147852 |   20 | High-back carpet-rollers
+007 | Bookcase       | 000987 |    5 | 5-shelf open bookcase
+008 | Desk           | 459214 |    2 | 6-foot worktable
+
+
+========================================
+=          Manual Validation           =
+========================================
+getItemName(): Armchair
+getNextSerialNumber(): 654321
+getNextSerialNumber(): 654322
+getQuantity(): 10
+getQuantity(): 9
+
+
+========================================
+=                Orders                =
+========================================
+Cornel B. - 1-Room Home Office
+[000000] Office Chair                   - TO BE FILLED
+[000000] Desk                           - TO BE FILLED
+[000000] Bookcase                       - TO BE FILLED
+[000000] Bookcase                       - TO BE FILLED
+[000000] Filing Cabinet                 - TO BE FILLED
+Chris S. - Bedroom
+[000000] Bed                            - TO BE FILLED
+[000000] Armchair                       - TO BE FILLED
+[000000] Nighttable                     - TO BE FILLED
+[000000] Dresser                        - TO BE FILLED
+[000000] Nighttable                     - TO BE FILLED
+John M. - Kids Bedroom
+[000000] Bed                            - TO BE FILLED
+[000000] Bed                            - TO BE FILLED
+[000000] Bed                            - TO BE FILLED
+[000000] Bed                            - TO BE FILLED
+[000000] Nighttable                     - TO BE FILLED
+[000000] Nighttable                     - TO BE FILLED
+[000000] Dresser                        - TO BE FILLED
+[000000] Desk                           - TO BE FILLED
+Hong H. - 1-Room Office
+[000000] Desk                           - TO BE FILLED
+[000000] Office Chair                   - TO BE FILLED
+[000000] Office Chair                   - TO BE FILLED
+[000000] Filing Cabinet                 - TO BE FILLED
+[000000] Filing Cabinet                 - TO BE FILLED
+[000000] Filing Cabinet                 - TO BE FILLED
+[000000] Bookcase                       - TO BE FILLED
+Rania A. - 2-Room Home Office and Bedroom
+[000000] Desk                           - TO BE FILLED
+[000000] Desk                           - TO BE FILLED
+[000000] Office Chair                   - TO BE FILLED
+[000000] Bed                            - TO BE FILLED
+[000000] Office Chair                   - TO BE FILLED
+[000000] Office Chair                   - TO BE FILLED
+[000000] Nighttable                     - TO BE FILLED
+[000000] Armchair                       - TO BE FILLED
+[000000] Dresser                        - TO BE FILLED
+
+
+========================================
+=       Display Stations (loaded)      =
+========================================
+Armchair --> Nighttable
+Bed --> Dresser
+Dresser --> Armchair
+Nighttable --> Desk
+Filing Cabinet --> Bookcase
+Office Chair --> Filing Cabinet
+Bookcase --> End of Line
+Desk --> Office Chair
+
+
+========================================
+=      Display Stations (ordered)      =
+========================================
+Bed --> Dresser
+Dresser --> Armchair
+Armchair --> Nighttable
+Nighttable --> Desk
+Desk --> Office Chair
+Office Chair --> Filing Cabinet
+Filing Cabinet --> Bookcase
+Bookcase --> End of Line
+
+
+========================================
+=           Filling Orders             =
+========================================
+Line Manager Iteration: 1
+    Filled Chris S., Bedroom [Bed]
+    Filled Chris S., Bedroom [Dresser]
+    Filled Chris S., Bedroom [Armchair]
+    Filled Chris S., Bedroom [Nighttable]
+==161422== Conditional jump or move depends on uninitialised value(s)
+==161422==    at 0x4040FB: seneca::CustomerOrder::isItemFilled(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const (CustomerOrder.cpp:91)
+==161422==    by 0x404921: seneca::Workstation::attemptToMoveOrder() (Workstation.cpp:28)
+==161422==    by 0x4067EF: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}::operator()(seneca::Workstation*) const (LineManager.cpp:86)
+==161422==    by 0x406CF4: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2} std::for_each<__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}>(__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, __gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}) (stl_algo.h:3833)
+==161422==    by 0x4068ED: seneca::LineManager::run(std::ostream&) (LineManager.cpp:85)
+==161422==    by 0x40ACCD: main (tester_3_prof.cpp:120)
+==161422==  Uninitialised value was created by a heap allocation
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405EEB: std::__new_allocator<seneca::CustomerOrder>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x40591D: allocate (alloc_traits.h:482)
+==161422==    by 0x40591D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_node() (stl_deque.h:583)
+==161422==    by 0x405428: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_create_nodes(seneca::CustomerOrder**, seneca::CustomerOrder**) (stl_deque.h:684)
+==161422==    by 0x404F36: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:658)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x40B76F: seneca::Workstation::Workstation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Workstation.h:30)
+==161422==    by 0x40B306: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A5B3: main (tester_3_prof.cpp:62)
+==161422== 
+==161422== Conditional jump or move depends on uninitialised value(s)
+==161422==    at 0x4F7F493: _M_is_local (basic_string.h:264)
+==161422==    by 0x4F7F493: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) (basic_string.h:857)
+==161422==    by 0x403EEB: seneca::CustomerOrder::operator=(seneca::CustomerOrder&&) (CustomerOrder.cpp:59)
+==161422==    by 0x403E33: seneca::CustomerOrder::CustomerOrder(seneca::CustomerOrder&&) (CustomerOrder.cpp:47)
+==161422==    by 0x405252: construct<seneca::CustomerOrder, seneca::CustomerOrder> (new_allocator.h:187)
+==161422==    by 0x405252: construct<seneca::CustomerOrder, seneca::CustomerOrder> (alloc_traits.h:537)
+==161422==    by 0x405252: seneca::CustomerOrder& std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::emplace_back<seneca::CustomerOrder>(seneca::CustomerOrder&&) (deque.tcc:170)
+==161422==    by 0x404DA9: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::push_back(seneca::CustomerOrder&&) (stl_deque.h:1554)
+==161422==    by 0x404976: seneca::Workstation::attemptToMoveOrder() (Workstation.cpp:32)
+==161422==    by 0x4067EF: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}::operator()(seneca::Workstation*) const (LineManager.cpp:86)
+==161422==    by 0x406CF4: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2} std::for_each<__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}>(__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, __gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}) (stl_algo.h:3833)
+==161422==    by 0x4068ED: seneca::LineManager::run(std::ostream&) (LineManager.cpp:85)
+==161422==    by 0x40ACCD: main (tester_3_prof.cpp:120)
+==161422==  Uninitialised value was created by a heap allocation
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405EEB: std::__new_allocator<seneca::CustomerOrder>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x40591D: allocate (alloc_traits.h:482)
+==161422==    by 0x40591D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_node() (stl_deque.h:583)
+==161422==    by 0x405428: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_create_nodes(seneca::CustomerOrder**, seneca::CustomerOrder**) (stl_deque.h:684)
+==161422==    by 0x404F36: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:658)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x40B76F: seneca::Workstation::Workstation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Workstation.h:30)
+==161422==    by 0x40B306: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A5B3: main (tester_3_prof.cpp:62)
+==161422== 
+==161422== Conditional jump or move depends on uninitialised value(s)
+==161422==    at 0x4F7F493: _M_is_local (basic_string.h:264)
+==161422==    by 0x4F7F493: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) (basic_string.h:857)
+==161422==    by 0x403F11: seneca::CustomerOrder::operator=(seneca::CustomerOrder&&) (CustomerOrder.cpp:60)
+==161422==    by 0x403E33: seneca::CustomerOrder::CustomerOrder(seneca::CustomerOrder&&) (CustomerOrder.cpp:47)
+==161422==    by 0x405252: construct<seneca::CustomerOrder, seneca::CustomerOrder> (new_allocator.h:187)
+==161422==    by 0x405252: construct<seneca::CustomerOrder, seneca::CustomerOrder> (alloc_traits.h:537)
+==161422==    by 0x405252: seneca::CustomerOrder& std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::emplace_back<seneca::CustomerOrder>(seneca::CustomerOrder&&) (deque.tcc:170)
+==161422==    by 0x404DA9: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::push_back(seneca::CustomerOrder&&) (stl_deque.h:1554)
+==161422==    by 0x404976: seneca::Workstation::attemptToMoveOrder() (Workstation.cpp:32)
+==161422==    by 0x4067EF: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}::operator()(seneca::Workstation*) const (LineManager.cpp:86)
+==161422==    by 0x406CF4: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2} std::for_each<__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}>(__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, __gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}) (stl_algo.h:3833)
+==161422==    by 0x4068ED: seneca::LineManager::run(std::ostream&) (LineManager.cpp:85)
+==161422==    by 0x40ACCD: main (tester_3_prof.cpp:120)
+==161422==  Uninitialised value was created by a heap allocation
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405EEB: std::__new_allocator<seneca::CustomerOrder>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x40591D: allocate (alloc_traits.h:482)
+==161422==    by 0x40591D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_node() (stl_deque.h:583)
+==161422==    by 0x405428: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_create_nodes(seneca::CustomerOrder**, seneca::CustomerOrder**) (stl_deque.h:684)
+==161422==    by 0x404F36: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:658)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x40B76F: seneca::Workstation::Workstation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Workstation.h:30)
+==161422==    by 0x40B306: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A5B3: main (tester_3_prof.cpp:62)
+==161422== 
+==161422== Conditional jump or move depends on uninitialised value(s)
+==161422==    at 0x40407A: seneca::CustomerOrder::isOrderFilled() const (CustomerOrder.cpp:83)
+==161422==    by 0x404984: seneca::Workstation::attemptToMoveOrder() (Workstation.cpp:35)
+==161422==    by 0x4067EF: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}::operator()(seneca::Workstation*) const (LineManager.cpp:86)
+==161422==    by 0x406CF4: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2} std::for_each<__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}>(__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, __gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}) (stl_algo.h:3833)
+==161422==    by 0x4068ED: seneca::LineManager::run(std::ostream&) (LineManager.cpp:85)
+==161422==    by 0x40ACCD: main (tester_3_prof.cpp:120)
+==161422==  Uninitialised value was created by a heap allocation
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405EEB: std::__new_allocator<seneca::CustomerOrder>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x40591D: allocate (alloc_traits.h:482)
+==161422==    by 0x40591D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_node() (stl_deque.h:583)
+==161422==    by 0x405428: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_create_nodes(seneca::CustomerOrder**, seneca::CustomerOrder**) (stl_deque.h:684)
+==161422==    by 0x404F36: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:658)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x40B76F: seneca::Workstation::Workstation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Workstation.h:30)
+==161422==    by 0x40B306: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A5B3: main (tester_3_prof.cpp:62)
+==161422== 
+Line Manager Iteration: 2
+    Filled John M., Kids Bedroom [Bed]
+    Filled John M., Kids Bedroom [Dresser]
+    Filled John M., Kids Bedroom [Nighttable]
+    Filled John M., Kids Bedroom [Desk]
+Line Manager Iteration: 3
+    Filled Hong H., 1-Room Office [Desk]
+    Filled Hong H., 1-Room Office [Office Chair]
+    Filled Hong H., 1-Room Office [Filing Cabinet]
+    Filled Hong H., 1-Room Office [Bookcase]
+Line Manager Iteration: 4
+    Filled Rania A., 2-Room Home Office and Bedroom [Bed]
+    Filled Rania A., 2-Room Home Office and Bedroom [Dresser]
+    Filled Rania A., 2-Room Home Office and Bedroom [Armchair]
+    Filled Rania A., 2-Room Home Office and Bedroom [Nighttable]
+Unable to fill Rania A., 2-Room Home Office and Bedroom [Desk]
+Unable to fill Rania A., 2-Room Home Office and Bedroom [Desk]
+    Filled Rania A., 2-Room Home Office and Bedroom [Office Chair]
+Line Manager Iteration: 5
+Line Manager Iteration: 6
+Line Manager Iteration: 7
+Line Manager Iteration: 8
+Line Manager Iteration: 9
+Line Manager Iteration: 10
+Line Manager Iteration: 11
+Line Manager Iteration: 12
+Line Manager Iteration: 13
+Line Manager Iteration: 14
+Line Manager Iteration: 15
+Line Manager Iteration: 16
+Line Manager Iteration: 17
+Line Manager Iteration: 18
+Line Manager Iteration: 19
+Line Manager Iteration: 20
+Line Manager Iteration: 21
+Line Manager Iteration: 22
+Line Manager Iteration: 23
+Line Manager Iteration: 24
+Line Manager Iteration: 25
+Line Manager Iteration: 26
+Line Manager Iteration: 27
+Line Manager Iteration: 28
+Line Manager Iteration: 29
+Line Manager Iteration: 30
+Line Manager Iteration: 31
+Line Manager Iteration: 32
+Line Manager Iteration: 33
+Line Manager Iteration: 34
+Line Manager Iteration: 35
+Line Manager Iteration: 36
+Line Manager Iteration: 37
+Line Manager Iteration: 38
+Line Manager Iteration: 39
+Line Manager Iteration: 40
+Line Manager Iteration: 41
+Line Manager Iteration: 42
+Line Manager Iteration: 43
+Line Manager Iteration: 44
+Line Manager Iteration: 45
+Line Manager Iteration: 46
+Line Manager Iteration: 47
+Line Manager Iteration: 48
+Line Manager Iteration: 49
+Line Manager Iteration: 50
+Line Manager Iteration: 51
+Line Manager Iteration: 52
+Line Manager Iteration: 53
+Line Manager Iteration: 54
+Line Manager Iteration: 55
+Line Manager Iteration: 56
+Line Manager Iteration: 57
+Line Manager Iteration: 58
+Line Manager Iteration: 59
+Line Manager Iteration: 60
+Line Manager Iteration: 61
+Line Manager Iteration: 62
+Line Manager Iteration: 63
+Line Manager Iteration: 64
+Line Manager Iteration: 65
+Line Manager Iteration: 66
+Line Manager Iteration: 67
+Line Manager Iteration: 68
+Line Manager Iteration: 69
+Line Manager Iteration: 70
+Line Manager Iteration: 71
+Line Manager Iteration: 72
+Line Manager Iteration: 73
+Line Manager Iteration: 74
+Line Manager Iteration: 75
+Line Manager Iteration: 76
+Line Manager Iteration: 77
+Line Manager Iteration: 78
+Line Manager Iteration: 79
+Line Manager Iteration: 80
+Line Manager Iteration: 81
+Line Manager Iteration: 82
+Line Manager Iteration: 83
+Line Manager Iteration: 84
+Line Manager Iteration: 85
+Line Manager Iteration: 86
+Line Manager Iteration: 87
+Line Manager Iteration: 88
+Line Manager Iteration: 89
+Line Manager Iteration: 90
+Line Manager Iteration: 91
+Line Manager Iteration: 92
+Line Manager Iteration: 93
+Line Manager Iteration: 94
+Line Manager Iteration: 95
+Line Manager Iteration: 96
+Line Manager Iteration: 97
+Line Manager Iteration: 98
+Line Manager Iteration: 99
+Line Manager Iteration: 100
+Line Manager Iteration: 101
+Line Manager Iteration: 102
+Line Manager Iteration: 103
+Line Manager Iteration: 104
+Line Manager Iteration: 105
+Line Manager Iteration: 106
+Line Manager Iteration: 107
+Line Manager Iteration: 108
+Line Manager Iteration: 109
+Line Manager Iteration: 110
+Line Manager Iteration: 111
+Line Manager Iteration: 112
+Line Manager Iteration: 113
+Line Manager Iteration: 114
+Line Manager Iteration: 115
+Line Manager Iteration: 116
+Line Manager Iteration: 117
+Line Manager Iteration: 118
+Line Manager Iteration: 119
+Line Manager Iteration: 120
+Line Manager Iteration: 121
+Line Manager Iteration: 122
+Line Manager Iteration: 123
+Line Manager Iteration: 124
+Line Manager Iteration: 125
+Line Manager Iteration: 126
+Line Manager Iteration: 127
+Line Manager Iteration: 128
+Line Manager Iteration: 129
+Line Manager Iteration: 130
+Line Manager Iteration: 131
+Line Manager Iteration: 132
+Line Manager Iteration: 133
+Line Manager Iteration: 134
+Line Manager Iteration: 135
+Line Manager Iteration: 136
+Line Manager Iteration: 137
+Line Manager Iteration: 138
+Line Manager Iteration: 139
+Line Manager Iteration: 140
+Line Manager Iteration: 141
+Line Manager Iteration: 142
+Line Manager Iteration: 143
+Line Manager Iteration: 144
+Line Manager Iteration: 145
+Line Manager Iteration: 146
+Line Manager Iteration: 147
+Line Manager Iteration: 148
+Line Manager Iteration: 149
+Line Manager Iteration: 150
+Line Manager Iteration: 151
+Line Manager Iteration: 152
+Line Manager Iteration: 153
+Line Manager Iteration: 154
+Line Manager Iteration: 155
+Line Manager Iteration: 156
+Line Manager Iteration: 157
+Line Manager Iteration: 158
+Line Manager Iteration: 159
+Line Manager Iteration: 160
+Line Manager Iteration: 161
+Line Manager Iteration: 162
+Line Manager Iteration: 163
+Line Manager Iteration: 164
+Line Manager Iteration: 165
+Line Manager Iteration: 166
+Line Manager Iteration: 167
+Line Manager Iteration: 168
+Line Manager Iteration: 169
+Line Manager Iteration: 170
+Line Manager Iteration: 171
+Line Manager Iteration: 172
+Line Manager Iteration: 173
+Line Manager Iteration: 174
+Line Manager Iteration: 175
+Line Manager Iteration: 176
+Line Manager Iteration: 177
+Line Manager Iteration: 178
+Line Manager Iteration: 179
+Line Manager Iteration: 180
+Line Manager Iteration: 181
+Line Manager Iteration: 182
+Line Manager Iteration: 183
+Line Manager Iteration: 184
+Line Manager Iteration: 185
+Line Manager Iteration: 186
+Line Manager Iteration: 187
+Line Manager Iteration: 188
+Line Manager Iteration: 189
+Line Manager Iteration: 190
+Line Manager Iteration: 191
+Line Manager Iteration: 192
+Line Manager Iteration: 193
+Line Manager Iteration: 194
+Line Manager Iteration: 195
+Line Manager Iteration: 196
+Line Manager Iteration: 197
+Line Manager Iteration: 198
+Line Manager Iteration: 199
+Line Manager Iteration: 200
+Line Manager Iteration: 201
+Line Manager Iteration: 202
+Line Manager Iteration: 203
+Line Manager Iteration: 204
+Line Manager Iteration: 205
+Line Manager Iteration: 206
+Line Manager Iteration: 207
+Line Manager Iteration: 208
+Line Manager Iteration: 209
+Line Manager Iteration: 210
+Line Manager Iteration: 211
+Line Manager Iteration: 212
+Line Manager Iteration: 213
+Line Manager Iteration: 214
+Line Manager Iteration: 215
+Line Manager Iteration: 216
+Line Manager Iteration: 217
+Line Manager Iteration: 218
+Line Manager Iteration: 219
+Line Manager Iteration: 220
+Line Manager Iteration: 221
+Line Manager Iteration: 222
+Line Manager Iteration: 223
+Line Manager Iteration: 224
+Line Manager Iteration: 225
+Line Manager Iteration: 226
+Line Manager Iteration: 227
+Line Manager Iteration: 228
+Line Manager Iteration: 229
+Line Manager Iteration: 230
+Line Manager Iteration: 231
+Line Manager Iteration: 232
+Line Manager Iteration: 233
+Line Manager Iteration: 234
+Line Manager Iteration: 235
+Line Manager Iteration: 236
+Line Manager Iteration: 237
+Line Manager Iteration: 238
+Line Manager Iteration: 239
+Line Manager Iteration: 240
+Line Manager Iteration: 241
+Line Manager Iteration: 242
+Line Manager Iteration: 243
+Line Manager Iteration: 244
+Line Manager Iteration: 245
+Line Manager Iteration: 246
+Line Manager Iteration: 247
+Line Manager Iteration: 248
+Line Manager Iteration: 249
+Line Manager Iteration: 250
+Line Manager Iteration: 251
+Line Manager Iteration: 252
+Line Manager Iteration: 253
+Line Manager Iteration: 254
+Line Manager Iteration: 255
+Line Manager Iteration: 256
+Line Manager Iteration: 257
+Line Manager Iteration: 258
+Line Manager Iteration: 259
+Line Manager Iteration: 260
+Line Manager Iteration: 261
+Line Manager Iteration: 262
+Line Manager Iteration: 263
+Line Manager Iteration: 264
+Line Manager Iteration: 265
+Line Manager Iteration: 266
+Line Manager Iteration: 267
+Line Manager Iteration: 268
+Line Manager Iteration: 269
+Line Manager Iteration: 270
+Line Manager Iteration: 271
+Line Manager Iteration: 272
+Line Manager Iteration: 273
+Line Manager Iteration: 274
+Line Manager Iteration: 275
+Line Manager Iteration: 276
+Line Manager Iteration: 277
+Line Manager Iteration: 278
+Line Manager Iteration: 279
+Line Manager Iteration: 280
+Line Manager Iteration: 281
+Line Manager Iteration: 282
+Line Manager Iteration: 283
+Line Manager Iteration: 284
+Line Manager Iteration: 285
+Line Manager Iteration: 286
+Line Manager Iteration: 287
+Line Manager Iteration: 288
+Line Manager Iteration: 289
+Line Manager Iteration: 290
+Line Manager Iteration: 291
+Line Manager Iteration: 292
+Line Manager Iteration: 293
+Line Manager Iteration: 294
+Line Manager Iteration: 295
+Line Manager Iteration: 296
+Line Manager Iteration: 297
+Line Manager Iteration: 298
+Line Manager Iteration: 299
+Line Manager Iteration: 300
+Line Manager Iteration: 301
+Line Manager Iteration: 302
+Line Manager Iteration: 303
+Line Manager Iteration: 304
+Line Manager Iteration: 305
+Line Manager Iteration: 306
+Line Manager Iteration: 307
+Line Manager Iteration: 308
+Line Manager Iteration: 309
+Line Manager Iteration: 310
+Line Manager Iteration: 311
+Line Manager Iteration: 312
+Line Manager Iteration: 313
+Line Manager Iteration: 314
+Line Manager Iteration: 315
+Line Manager Iteration: 316
+Line Manager Iteration: 317
+Line Manager Iteration: 318
+Line Manager Iteration: 319
+Line Manager Iteration: 320
+Line Manager Iteration: 321
+Line Manager Iteration: 322
+Line Manager Iteration: 323
+Line Manager Iteration: 324
+Line Manager Iteration: 325
+Line Manager Iteration: 326
+Line Manager Iteration: 327
+Line Manager Iteration: 328
+Line Manager Iteration: 329
+Line Manager Iteration: 330
+Line Manager Iteration: 331
+Line Manager Iteration: 332
+Line Manager Iteration: 333
+Line Manager Iteration: 334
+Line Manager Iteration: 335
+Line Manager Iteration: 336
+Line Manager Iteration: 337
+Line Manager Iteration: 338
+Line Manager Iteration: 339
+Line Manager Iteration: 340
+Line Manager Iteration: 341
+Line Manager Iteration: 342
+Line Manager Iteration: 343
+Line Manager Iteration: 344
+Line Manager Iteration: 345
+Line Manager Iteration: 346
+Line Manager Iteration: 347
+Line Manager Iteration: 348
+Line Manager Iteration: 349
+Line Manager Iteration: 350
+Line Manager Iteration: 351
+Line Manager Iteration: 352
+Line Manager Iteration: 353
+Line Manager Iteration: 354
+Line Manager Iteration: 355
+Line Manager Iteration: 356
+Line Manager Iteration: 357
+Line Manager Iteration: 358
+Line Manager Iteration: 359
+Line Manager Iteration: 360
+Line Manager Iteration: 361
+Line Manager Iteration: 362
+Line Manager Iteration: 363
+Line Manager Iteration: 364
+Line Manager Iteration: 365
+Line Manager Iteration: 366
+Line Manager Iteration: 367
+Line Manager Iteration: 368
+Line Manager Iteration: 369
+Line Manager Iteration: 370
+Line Manager Iteration: 371
+Line Manager Iteration: 372
+Line Manager Iteration: 373
+Line Manager Iteration: 374
+Line Manager Iteration: 375
+Line Manager Iteration: 376
+Line Manager Iteration: 377
+Line Manager Iteration: 378
+Line Manager Iteration: 379
+Line Manager Iteration: 380
+Line Manager Iteration: 381
+Line Manager Iteration: 382
+Line Manager Iteration: 383
+Line Manager Iteration: 384
+Line Manager Iteration: 385
+Line Manager Iteration: 386
+Line Manager Iteration: 387
+Line Manager Iteration: 388
+Line Manager Iteration: 389
+Line Manager Iteration: 390
+Line Manager Iteration: 391
+Line Manager Iteration: 392
+Line Manager Iteration: 393
+Line Manager Iteration: 394
+Line Manager Iteration: 395
+Line Manager Iteration: 396
+Line Manager Iteration: 397
+Line Manager Iteration: 398
+Line Manager Iteration: 399
+Line Manager Iteration: 400
+Line Manager Iteration: 401
+Line Manager Iteration: 402
+Line Manager Iteration: 403
+Line Manager Iteration: 404
+Line Manager Iteration: 405
+Line Manager Iteration: 406
+Line Manager Iteration: 407
+Line Manager Iteration: 408
+Line Manager Iteration: 409
+Line Manager Iteration: 410
+Line Manager Iteration: 411
+Line Manager Iteration: 412
+Line Manager Iteration: 413
+Line Manager Iteration: 414
+Line Manager Iteration: 415
+Line Manager Iteration: 416
+Line Manager Iteration: 417
+Line Manager Iteration: 418
+Line Manager Iteration: 419
+Line Manager Iteration: 420
+Line Manager Iteration: 421
+Line Manager Iteration: 422
+Line Manager Iteration: 423
+Line Manager Iteration: 424
+Line Manager Iteration: 425
+Line Manager Iteration: 426
+Line Manager Iteration: 427
+Line Manager Iteration: 428
+Line Manager Iteration: 429
+Line Manager Iteration: 430
+Line Manager Iteration: 431
+Line Manager Iteration: 432
+Line Manager Iteration: 433
+Line Manager Iteration: 434
+Line Manager Iteration: 435
+Line Manager Iteration: 436
+Line Manager Iteration: 437
+Line Manager Iteration: 438
+Line Manager Iteration: 439
+Line Manager Iteration: 440
+Line Manager Iteration: 441
+Line Manager Iteration: 442
+Line Manager Iteration: 443
+Line Manager Iteration: 444
+Line Manager Iteration: 445
+Line Manager Iteration: 446
+Line Manager Iteration: 447
+Line Manager Iteration: 448
+Line Manager Iteration: 449
+Line Manager Iteration: 450
+Line Manager Iteration: 451
+Line Manager Iteration: 452
+Line Manager Iteration: 453
+Line Manager Iteration: 454
+Line Manager Iteration: 455
+Line Manager Iteration: 456
+Line Manager Iteration: 457
+Line Manager Iteration: 458
+Line Manager Iteration: 459
+Line Manager Iteration: 460
+Line Manager Iteration: 461
+Line Manager Iteration: 462
+Line Manager Iteration: 463
+Line Manager Iteration: 464
+Line Manager Iteration: 465
+Line Manager Iteration: 466
+Line Manager Iteration: 467
+Line Manager Iteration: 468
+Line Manager Iteration: 469
+Line Manager Iteration: 470
+Line Manager Iteration: 471
+Line Manager Iteration: 472
+Line Manager Iteration: 473
+Line Manager Iteration: 474
+Line Manager Iteration: 475
+Line Manager Iteration: 476
+Line Manager Iteration: 477
+Line Manager Iteration: 478
+Line Manager Iteration: 479
+Line Manager Iteration: 480
+Line Manager Iteration: 481
+Line Manager Iteration: 482
+Line Manager Iteration: 483
+Line Manager Iteration: 484
+Line Manager Iteration: 485
+Line Manager Iteration: 486
+Line Manager Iteration: 487
+Line Manager Iteration: 488
+Line Manager Iteration: 489
+Line Manager Iteration: 490
+Line Manager Iteration: 491
+Line Manager Iteration: 492
+Line Manager Iteration: 493
+Line Manager Iteration: 494
+Line Manager Iteration: 495
+Line Manager Iteration: 496
+Line Manager Iteration: 497
+Line Manager Iteration: 498
+Line Manager Iteration: 499
+Line Manager Iteration: 500
+Line Manager Iteration: 501
+Line Manager Iteration: 502
+Line Manager Iteration: 503
+Line Manager Iteration: 504
+Line Manager Iteration: 505
+Line Manager Iteration: 506
+Line Manager Iteration: 507
+Line Manager Iteration: 508
+Line Manager Iteration: 509
+Line Manager Iteration: 510
+Line Manager Iteration: 511
+Line Manager Iteration: 512
+Line Manager Iteration: 513
+Line Manager Iteration: 514
+Line Manager Iteration: 515
+Line Manager Iteration: 516
+Line Manager Iteration: 517
+Line Manager Iteration: 518
+Line Manager Iteration: 519
+Line Manager Iteration: 520
+Line Manager Iteration: 521
+Line Manager Iteration: 522
+Line Manager Iteration: 523
+Line Manager Iteration: 524
+Line Manager Iteration: 525
+Line Manager Iteration: 526
+Line Manager Iteration: 527
+Line Manager Iteration: 528
+Line Manager Iteration: 529
+Line Manager Iteration: 530
+Line Manager Iteration: 531
+Line Manager Iteration: 532
+Line Manager Iteration: 533
+Line Manager Iteration: 534
+Line Manager Iteration: 535
+Line Manager Iteration: 536
+Line Manager Iteration: 537
+Line Manager Iteration: 538
+Line Manager Iteration: 539
+Line Manager Iteration: 540
+Line Manager Iteration: 541
+Line Manager Iteration: 542
+Line Manager Iteration: 543
+Line Manager Iteration: 544
+Line Manager Iteration: 545
+Line Manager Iteration: 546
+Line Manager Iteration: 547
+Line Manager Iteration: 548
+Line Manager Iteration: 549
+Line Manager Iteration: 550
+Line Manager Iteration: 551
+Line Manager Iteration: 552
+Line Manager Iteration: 553
+Line Manager Iteration: 554
+Line Manager Iteration: 555
+Line Manager Iteration: 556
+Line Manager Iteration: 557
+Line Manager Iteration: 558
+Line Manager Iteration: 559
+Line Manager Iteration: 560
+Line Manager Iteration: 561
+Line Manager Iteration: 562
+Line Manager Iteration: 563
+Line Manager Iteration: 564
+Line Manager Iteration: 565
+Line Manager Iteration: 566
+Line Manager Iteration: 567
+Line Manager Iteration: 568
+Line Manager Iteration: 569
+Line Manager Iteration: 570
+Line Manager Iteration: 571
+Line Manager Iteration: 572
+Line Manager Iteration: 573
+Line Manager Iteration: 574
+Line Manager Iteration: 575
+Line Manager Iteration: 576
+Line Manager Iteration: 577
+Line Manager Iteration: 578
+Line Manager Iteration: 579
+Line Manager Iteration: 580
+Line Manager Iteration: 581
+Line Manager Iteration: 582
+Line Manager Iteration: 583
+Line Manager Iteration: 584
+Line Manager Iteration: 585
+Line Manager Iteration: 586
+Line Manager Iteration: 587
+Line Manager Iteration: 588
+Line Manager Iteration: 589
+Line Manager Iteration: 590
+Line Manager Iteration: 591
+Line Manager Iteration: 592
+Line Manager Iteration: 593
+Line Manager Iteration: 594
+Line Manager Iteration: 595
+Line Manager Iteration: 596
+Line Manager Iteration: 597
+Line Manager Iteration: 598
+Line Manager Iteration: 599
+Line Manager Iteration: 600
+Line Manager Iteration: 601
+Line Manager Iteration: 602
+Line Manager Iteration: 603
+Line Manager Iteration: 604
+Line Manager Iteration: 605
+Line Manager Iteration: 606
+Line Manager Iteration: 607
+Line Manager Iteration: 608
+Line Manager Iteration: 609
+Line Manager Iteration: 610
+Line Manager Iteration: 611
+Line Manager Iteration: 612
+Line Manager Iteration: 613
+Line Manager Iteration: 614
+Line Manager Iteration: 615
+Line Manager Iteration: 616
+Line Manager Iteration: 617
+Line Manager Iteration: 618
+Line Manager Iteration: 619
+Line Manager Iteration: 620
+Line Manager Iteration: 621
+Line Manager Iteration: 622
+Line Manager Iteration: 623
+Line Manager Iteration: 624
+Line Manager Iteration: 625
+Line Manager Iteration: 626
+Line Manager Iteration: 627
+Line Manager Iteration: 628
+Line Manager Iteration: 629
+Line Manager Iteration: 630
+Line Manager Iteration: 631
+Line Manager Iteration: 632
+Line Manager Iteration: 633
+Line Manager Iteration: 634
+Line Manager Iteration: 635
+Line Manager Iteration: 636
+Line Manager Iteration: 637
+Line Manager Iteration: 638
+Line Manager Iteration: 639
+Line Manager Iteration: 640
+Line Manager Iteration: 641
+Line Manager Iteration: 642
+Line Manager Iteration: 643
+Line Manager Iteration: 644
+Line Manager Iteration: 645
+Line Manager Iteration: 646
+Line Manager Iteration: 647
+Line Manager Iteration: 648
+Line Manager Iteration: 649
+Line Manager Iteration: 650
+Line Manager Iteration: 651
+Line Manager Iteration: 652
+Line Manager Iteration: 653
+Line Manager Iteration: 654
+Line Manager Iteration: 655
+Line Manager Iteration: 656
+Line Manager Iteration: 657
+Line Manager Iteration: 658
+Line Manager Iteration: 659
+Line Manager Iteration: 660
+Line Manager Iteration: 661
+Line Manager Iteration: 662
+Line Manager Iteration: 663
+Line Manager Iteration: 664
+Line Manager Iteration: 665
+Line Manager Iteration: 666
+Line Manager Iteration: 667
+Line Manager Iteration: 668
+Line Manager Iteration: 669
+Line Manager Iteration: 670
+Line Manager Iteration: 671
+Line Manager Iteration: 672
+Line Manager Iteration: 673
+Line Manager Iteration: 674
+Line Manager Iteration: 675
+Line Manager Iteration: 676
+Line Manager Iteration: 677
+Line Manager Iteration: 678
+Line Manager Iteration: 679
+Line Manager Iteration: 680
+Line Manager Iteration: 681
+Line Manager Iteration: 682
+Line Manager Iteration: 683
+Line Manager Iteration: 684
+Line Manager Iteration: 685
+Line Manager Iteration: 686
+Line Manager Iteration: 687
+Line Manager Iteration: 688
+Line Manager Iteration: 689
+Line Manager Iteration: 690
+Line Manager Iteration: 691
+Line Manager Iteration: 692
+Line Manager Iteration: 693
+Line Manager Iteration: 694
+Line Manager Iteration: 695
+Line Manager Iteration: 696
+Line Manager Iteration: 697
+Line Manager Iteration: 698
+Line Manager Iteration: 699
+Line Manager Iteration: 700
+Line Manager Iteration: 701
+Line Manager Iteration: 702
+Line Manager Iteration: 703
+Line Manager Iteration: 704
+Line Manager Iteration: 705
+Line Manager Iteration: 706
+Line Manager Iteration: 707
+Line Manager Iteration: 708
+Line Manager Iteration: 709
+Line Manager Iteration: 710
+Line Manager Iteration: 711
+Line Manager Iteration: 712
+Line Manager Iteration: 713
+Line Manager Iteration: 714
+Line Manager Iteration: 715
+Line Manager Iteration: 716
+Line Manager Iteration: 717
+Line Manager Iteration: 718
+Line Manager Iteration: 719
+Line Manager Iteration: 720
+Line Manager Iteration: 721
+Line Manager Iteration: 722
+Line Manager Iteration: 723
+Line Manager Iteration: 724
+Line Manager Iteration: 725
+Line Manager Iteration: 726
+Line Manager Iteration: 727
+Line Manager Iteration: 728
+Line Manager Iteration: 729
+Line Manager Iteration: 730
+Line Manager Iteration: 731
+Line Manager Iteration: 732
+Line Manager Iteration: 733
+Line Manager Iteration: 734
+Line Manager Iteration: 735
+Line Manager Iteration: 736
+Line Manager Iteration: 737
+Line Manager Iteration: 738
+Line Manager Iteration: 739
+Line Manager Iteration: 740
+Line Manager Iteration: 741
+Line Manager Iteration: 742
+Line Manager Iteration: 743
+Line Manager Iteration: 744
+Line Manager Iteration: 745
+Line Manager Iteration: 746
+Line Manager Iteration: 747
+Line Manager Iteration: 748
+Line Manager Iteration: 749
+Line Manager Iteration: 750
+Line Manager Iteration: 751
+Line Manager Iteration: 752
+Line Manager Iteration: 753
+Line Manager Iteration: 754
+Line Manager Iteration: 755
+Line Manager Iteration: 756
+Line Manager Iteration: 757
+Line Manager Iteration: 758
+Line Manager Iteration: 759
+Line Manager Iteration: 760
+Line Manager Iteration: 761
+Line Manager Iteration: 762
+Line Manager Iteration: 763
+Line Manager Iteration: 764
+Line Manager Iteration: 765
+Line Manager Iteration: 766
+Line Manager Iteration: 767
+Line Manager Iteration: 768
+Line Manager Iteration: 769
+Line Manager Iteration: 770
+Line Manager Iteration: 771
+Line Manager Iteration: 772
+Line Manager Iteration: 773
+Line Manager Iteration: 774
+Line Manager Iteration: 775
+Line Manager Iteration: 776
+Line Manager Iteration: 777
+Line Manager Iteration: 778
+Line Manager Iteration: 779
+Line Manager Iteration: 780
+Line Manager Iteration: 781
+Line Manager Iteration: 782
+Line Manager Iteration: 783
+Line Manager Iteration: 784
+Line Manager Iteration: 785
+Line Manager Iteration: 786
+Line Manager Iteration: 787
+Line Manager Iteration: 788
+Line Manager Iteration: 789
+Line Manager Iteration: 790
+Line Manager Iteration: 791
+Line Manager Iteration: 792
+Line Manager Iteration: 793
+Line Manager Iteration: 794
+Line Manager Iteration: 795
+Line Manager Iteration: 796
+Line Manager Iteration: 797
+Line Manager Iteration: 798
+Line Manager Iteration: 799
+Line Manager Iteration: 800
+Line Manager Iteration: 801
+Line Manager Iteration: 802
+Line Manager Iteration: 803
+Line Manager Iteration: 804
+Line Manager Iteration: 805
+Line Manager Iteration: 806
+Line Manager Iteration: 807
+Line Manager Iteration: 808
+Line Manager Iteration: 809
+Line Manager Iteration: 810
+Line Manager Iteration: 811
+Line Manager Iteration: 812
+Line Manager Iteration: 813
+Line Manager Iteration: 814
+Line Manager Iteration: 815
+Line Manager Iteration: 816
+Line Manager Iteration: 817
+Line Manager Iteration: 818
+Line Manager Iteration: 819
+Line Manager Iteration: 820
+Line Manager Iteration: 821
+Line Manager Iteration: 822
+Line Manager Iteration: 823
+Line Manager Iteration: 824
+Line Manager Iteration: 825
+Line Manager Iteration: 826
+Line Manager Iteration: 827
+Line Manager Iteration: 828
+Line Manager Iteration: 829
+Line Manager Iteration: 830
+Line Manager Iteration: 831
+Line Manager Iteration: 832
+Line Manager Iteration: 833
+Line Manager Iteration: 834
+Line Manager Iteration: 835
+Line Manager Iteration: 836
+Line Manager Iteration: 837
+Line Manager Iteration: 838
+Line Manager Iteration: 839
+Line Manager Iteration: 840
+Line Manager Iteration: 841
+Line Manager Iteration: 842
+Line Manager Iteration: 843
+Line Manager Iteration: 844
+Line Manager Iteration: 845
+Line Manager Iteration: 846
+Line Manager Iteration: 847
+Line Manager Iteration: 848
+Line Manager Iteration: 849
+Line Manager Iteration: 850
+Line Manager Iteration: 851
+Line Manager Iteration: 852
+Line Manager Iteration: 853
+Line Manager Iteration: 854
+Line Manager Iteration: 855
+Line Manager Iteration: 856
+Line Manager Iteration: 857
+Line Manager Iteration: 858
+Line Manager Iteration: 859
+Line Manager Iteration: 860
+Line Manager Iteration: 861
+Line Manager Iteration: 862
+Line Manager Iteration: 863
+Line Manager Iteration: 864
+Line Manager Iteration: 865
+Line Manager Iteration: 866
+Line Manager Iteration: 867
+Line Manager Iteration: 868
+Line Manager Iteration: 869
+Line Manager Iteration: 870
+Line Manager Iteration: 871
+Line Manager Iteration: 872
+Line Manager Iteration: 873
+Line Manager Iteration: 874
+Line Manager Iteration: 875
+Line Manager Iteration: 876
+Line Manager Iteration: 877
+Line Manager Iteration: 878
+Line Manager Iteration: 879
+Line Manager Iteration: 880
+Line Manager Iteration: 881
+Line Manager Iteration: 882
+Line Manager Iteration: 883
+Line Manager Iteration: 884
+Line Manager Iteration: 885
+Line Manager Iteration: 886
+Line Manager Iteration: 887
+Line Manager Iteration: 888
+Line Manager Iteration: 889
+Line Manager Iteration: 890
+Line Manager Iteration: 891
+Line Manager Iteration: 892
+Line Manager Iteration: 893
+Line Manager Iteration: 894
+Line Manager Iteration: 895
+Line Manager Iteration: 896
+Line Manager Iteration: 897
+Line Manager Iteration: 898
+Line Manager Iteration: 899
+Line Manager Iteration: 900
+Line Manager Iteration: 901
+Line Manager Iteration: 902
+Line Manager Iteration: 903
+Line Manager Iteration: 904
+Line Manager Iteration: 905
+Line Manager Iteration: 906
+Line Manager Iteration: 907
+Line Manager Iteration: 908
+Line Manager Iteration: 909
+Line Manager Iteration: 910
+Line Manager Iteration: 911
+Line Manager Iteration: 912
+Line Manager Iteration: 913
+Line Manager Iteration: 914
+Line Manager Iteration: 915
+Line Manager Iteration: 916
+Line Manager Iteration: 917
+Line Manager Iteration: 918
+Line Manager Iteration: 919
+Line Manager Iteration: 920
+Line Manager Iteration: 921
+Line Manager Iteration: 922
+Line Manager Iteration: 923
+Line Manager Iteration: 924
+Line Manager Iteration: 925
+Line Manager Iteration: 926
+Line Manager Iteration: 927
+Line Manager Iteration: 928
+Line Manager Iteration: 929
+Line Manager Iteration: 930
+Line Manager Iteration: 931
+Line Manager Iteration: 932
+Line Manager Iteration: 933
+Line Manager Iteration: 934
+Line Manager Iteration: 935
+Line Manager Iteration: 936
+Line Manager Iteration: 937
+Line Manager Iteration: 938
+Line Manager Iteration: 939
+Line Manager Iteration: 940
+Line Manager Iteration: 941
+Line Manager Iteration: 942
+Line Manager Iteration: 943
+Line Manager Iteration: 944
+Line Manager Iteration: 945
+Line Manager Iteration: 946
+Line Manager Iteration: 947
+Line Manager Iteration: 948
+Line Manager Iteration: 949
+Line Manager Iteration: 950
+Line Manager Iteration: 951
+Line Manager Iteration: 952
+Line Manager Iteration: 953
+Line Manager Iteration: 954
+Line Manager Iteration: 955
+Line Manager Iteration: 956
+Line Manager Iteration: 957
+Line Manager Iteration: 958
+Line Manager Iteration: 959
+Line Manager Iteration: 960
+Line Manager Iteration: 961
+Line Manager Iteration: 962
+Line Manager Iteration: 963
+Line Manager Iteration: 964
+Line Manager Iteration: 965
+Line Manager Iteration: 966
+Line Manager Iteration: 967
+Line Manager Iteration: 968
+Line Manager Iteration: 969
+Line Manager Iteration: 970
+Line Manager Iteration: 971
+Line Manager Iteration: 972
+Line Manager Iteration: 973
+Line Manager Iteration: 974
+Line Manager Iteration: 975
+Line Manager Iteration: 976
+Line Manager Iteration: 977
+Line Manager Iteration: 978
+Line Manager Iteration: 979
+Line Manager Iteration: 980
+Line Manager Iteration: 981
+Line Manager Iteration: 982
+Line Manager Iteration: 983
+Line Manager Iteration: 984
+Line Manager Iteration: 985
+Line Manager Iteration: 986
+Line Manager Iteration: 987
+Line Manager Iteration: 988
+Line Manager Iteration: 989
+Line Manager Iteration: 990
+Line Manager Iteration: 991
+Line Manager Iteration: 992
+Line Manager Iteration: 993
+Line Manager Iteration: 994
+Line Manager Iteration: 995
+Line Manager Iteration: 996
+Line Manager Iteration: 997
+Line Manager Iteration: 998
+Line Manager Iteration: 999
+Line Manager Iteration: 1000
+Line Manager Iteration: 1001
+Line Manager Iteration: 1002
+Line Manager Iteration: 1003
+Line Manager Iteration: 1004
+Line Manager Iteration: 1005
+Line Manager Iteration: 1006
+Line Manager Iteration: 1007
+Line Manager Iteration: 1008
+Line Manager Iteration: 1009
+Line Manager Iteration: 1010
+Line Manager Iteration: 1011
+Line Manager Iteration: 1012
+Line Manager Iteration: 1013
+Line Manager Iteration: 1014
+Line Manager Iteration: 1015
+Line Manager Iteration: 1016
+Line Manager Iteration: 1017
+Line Manager Iteration: 1018
+Line Manager Iteration: 1019
+Line Manager Iteration: 1020
+Line Manager Iteration: 1021
+Line Manager Iteration: 1022
+Line Manager Iteration: 1023
+Line Manager Iteration: 1024
+Line Manager Iteration: 1025
+Line Manager Iteration: 1026
+Line Manager Iteration: 1027
+Line Manager Iteration: 1028
+Line Manager Iteration: 1029
+Line Manager Iteration: 1030
+Line Manager Iteration: 1031
+Line Manager Iteration: 1032
+Line Manager Iteration: 1033
+Line Manager Iteration: 1034
+Line Manager Iteration: 1035
+Line Manager Iteration: 1036
+Line Manager Iteration: 1037
+Line Manager Iteration: 1038
+Line Manager Iteration: 1039
+Line Manager Iteration: 1040
+Line Manager Iteration: 1041
+Line Manager Iteration: 1042
+Line Manager Iteration: 1043
+Line Manager Iteration: 1044
+Line Manager Iteration: 1045
+Line Manager Iteration: 1046
+Line Manager Iteration: 1047
+Line Manager Iteration: 1048
+Line Manager Iteration: 1049
+Line Manager Iteration: 1050
+Line Manager Iteration: 1051
+Line Manager Iteration: 1052
+Line Manager Iteration: 1053
+Line Manager Iteration: 1054
+Line Manager Iteration: 1055
+Line Manager Iteration: 1056
+Line Manager Iteration: 1057
+Line Manager Iteration: 1058
+Line Manager Iteration: 1059
+Line Manager Iteration: 1060
+Line Manager Iteration: 1061
+Line Manager Iteration: 1062
+Line Manager Iteration: 1063
+Line Manager Iteration: 1064
+Line Manager Iteration: 1065
+Line Manager Iteration: 1066
+Line Manager Iteration: 1067
+Line Manager Iteration: 1068
+Line Manager Iteration: 1069
+Line Manager Iteration: 1070
+Line Manager Iteration: 1071
+Line Manager Iteration: 1072
+Line Manager Iteration: 1073
+Line Manager Iteration: 1074
+Line Manager Iteration: 1075
+Line Manager Iteration: 1076
+Line Manager Iteration: 1077
+Line Manager Iteration: 1078
+Line Manager Iteration: 1079
+Line Manager Iteration: 1080
+Line Manager Iteration: 1081
+Line Manager Iteration: 1082
+Line Manager Iteration: 1083
+Line Manager Iteration: 1084
+Line Manager Iteration: 1085
+Line Manager Iteration: 1086
+Line Manager Iteration: 1087
+Line Manager Iteration: 1088
+Line Manager Iteration: 1089
+Line Manager Iteration: 1090
+Line Manager Iteration: 1091
+Line Manager Iteration: 1092
+Line Manager Iteration: 1093
+Line Manager Iteration: 1094
+Line Manager Iteration: 1095
+Line Manager Iteration: 1096
+Line Manager Iteration: 1097
+Line Manager Iteration: 1098
+Line Manager Iteration: 1099
+Line Manager Iteration: 1100
+Line Manager Iteration: 1101
+Line Manager Iteration: 1102
+Line Manager Iteration: 1103
+Line Manager Iteration: 1104
+Line Manager Iteration: 1105
+Line Manager Iteration: 1106
+Line Manager Iteration: 1107
+Line Manager Iteration: 1108
+Line Manager Iteration: 1109
+Line Manager Iteration: 1110
+Line Manager Iteration: 1111
+Line Manager Iteration: 1112
+Line Manager Iteration: 1113
+Line Manager Iteration: 1114
+Line Manager Iteration: 1115
+Line Manager Iteration: 1116
+Line Manager Iteration: 1117
+Line Manager Iteration: 1118
+Line Manager Iteration: 1119
+Line Manager Iteration: 1120
+Line Manager Iteration: 1121
+Line Manager Iteration: 1122
+Line Manager Iteration: 1123
+Line Manager Iteration: 1124
+Line Manager Iteration: 1125
+Line Manager Iteration: 1126
+Line Manager Iteration: 1127
+Line Manager Iteration: 1128
+Line Manager Iteration: 1129
+Line Manager Iteration: 1130
+Line Manager Iteration: 1131
+Line Manager Iteration: 1132
+Line Manager Iteration: 1133
+Line Manager Iteration: 1134
+Line Manager Iteration: 1135
+Line Manager Iteration: 1136
+Line Manager Iteration: 1137
+Line Manager Iteration: 1138
+Line Manager Iteration: 1139
+Line Manager Iteration: 1140
+Line Manager Iteration: 1141
+Line Manager Iteration: 1142
+Line Manager Iteration: 1143
+Line Manager Iteration: 1144
+Line Manager Iteration: 1145
+Line Manager Iteration: 1146
+Line Manager Iteration: 1147
+Line Manager Iteration: 1148
+Line Manager Iteration: 1149
+Line Manager Iteration: 1150
+Line Manager Iteration: 1151
+Line Manager Iteration: 1152
+Line Manager Iteration: 1153
+Line Manager Iteration: 1154
+Line Manager Iteration: 1155
+Line Manager Iteration: 1156
+Line Manager Iteration: 1157
+Line Manager Iteration: 1158
+Line Manager Iteration: 1159
+Line Manager Iteration: 1160
+Line Manager Iteration: 1161
+Line Manager Iteration: 1162
+Line Manager Iteration: 1163
+Line Manager Iteration: 1164
+Line Manager Iteration: 1165
+Line Manager Iteration: 1166
+Line Manager Iteration: 1167
+Line Manager Iteration: 1168
+Line Manager Iteration: 1169
+Line Manager Iteration: 1170
+Line Manager Iteration: 1171
+Line Manager Iteration: 1172
+Line Manager Iteration: 1173
+Line Manager Iteration: 1174
+Line Manager Iteration: 1175
+Line Manager Iteration: 1176
+Line Manager Iteration: 1177
+Line Manager Iteration: 1178
+Line Manager Iteration: 1179
+Line Manager Iteration: 1180
+Line Manager Iteration: 1181
+Line Manager Iteration: 1182
+Line Manager Iteration: 1183
+Line Manager Iteration: 1184
+Line Manager Iteration: 1185
+Line Manager Iteration: 1186
+Line Manager Iteration: 1187
+Line Manager Iteration: 1188
+Line Manager Iteration: 1189
+Line Manager Iteration: 1190
+Line Manager Iteration: 1191
+Line Manager Iteration: 1192
+Line Manager Iteration: 1193
+Line Manager Iteration: 1194
+Line Manager Iteration: 1195
+Line Manager Iteration: 1196
+Line Manager Iteration: 1197
+Line Manager Iteration: 1198
+Line Manager Iteration: 1199
+Line Manager Iteration: 1200
+Line Manager Iteration: 1201
+Line Manager Iteration: 1202
+Line Manager Iteration: 1203
+Line Manager Iteration: 1204
+Line Manager Iteration: 1205
+Line Manager Iteration: 1206
+Line Manager Iteration: 1207
+Line Manager Iteration: 1208
+Line Manager Iteration: 1209
+Line Manager Iteration: 1210
+Line Manager Iteration: 1211
+Line Manager Iteration: 1212
+Line Manager Iteration: 1213
+Line Manager Iteration: 1214
+Line Manager Iteration: 1215
+Line Manager Iteration: 1216
+Line Manager Iteration: 1217
+Line Manager Iteration: 1218
+Line Manager Iteration: 1219
+Line Manager Iteration: 1220
+Line Manager Iteration: 1221
+Line Manager Iteration: 1222
+Line Manager Iteration: 1223
+Line Manager Iteration: 1224
+Line Manager Iteration: 1225
+Line Manager Iteration: 1226
+Line Manager Iteration: 1227
+Line Manager Iteration: 1228
+Line Manager Iteration: 1229
+Line Manager Iteration: 1230
+Line Manager Iteration: 1231
+Line Manager Iteration: 1232
+Line Manager Iteration: 1233
+Line Manager Iteration: 1234
+Line Manager Iteration: 1235
+Line Manager Iteration: 1236
+Line Manager Iteration: 1237
+Line Manager Iteration: 1238
+Line Manager Iteration: 1239
+Line Manager Iteration: 1240
+Line Manager Iteration: 1241
+Line Manager Iteration: 1242
+Line Manager Iteration: 1243
+Line Manager Iteration: 1244
+Line Manager Iteration: 1245
+Line Manager Iteration: 1246
+Line Manager Iteration: 1247
+Line Manager Iteration: 1248
+Line Manager Iteration: 1249
+Line Manager Iteration: 1250
+Line Manager Iteration: 1251
+Line Manager Iteration: 1252
+Line Manager Iteration: 1253
+Line Manager Iteration: 1254
+Line Manager Iteration: 1255
+Line Manager Iteration: 1256
+Line Manager Iteration: 1257
+Line Manager Iteration: 1258
+Line Manager Iteration: 1259
+Line Manager Iteration: 1260
+Line Manager Iteration: 1261
+Line Manager Iteration: 1262
+Line Manager Iteration: 1263
+Line Manager Iteration: 1264
+Line Manager Iteration: 1265
+Line Manager Iteration: 1266
+Line Manager Iteration: 1267
+Line Manager Iteration: 1268
+Line Manager Iteration: 1269
+Line Manager Iteration: 1270
+Line Manager Iteration: 1271
+Line Manager Iteration: 1272
+Line Manager Iteration: 1273
+Line Manager Iteration: 1274
+Line Manager Iteration: 1275
+Line Manager Iteration: 1276
+Line Manager Iteration: 1277
+Line Manager Iteration: 1278
+Line Manager Iteration: 1279
+Line Manager Iteration: 1280
+Line Manager Iteration: 1281
+Line Manager Iteration: 1282
+Line Manager Iteration: 1283
+Line Manager Iteration: 1284
+Line Manager Iteration: 1285
+Line Manager Iteration: 1286
+Line Manager Iteration: 1287
+Line Manager Iteration: 1288
+Line Manager Iteration: 1289
+Line Manager Iteration: 1290
+Line Manager Iteration: 1291
+Line Manager Iteration: 1292
+Line Manager Iteration: 1293
+Line Manager Iteration: 1294
+Line Manager Iteration: 1295
+Line Manager Iteration: 1296
+Line Manager Iteration: 1297
+Line Manager Iteration: 1298
+Line Manager Iteration: 1299
+Line Manager Iteration: 1300
+Line Manager Iteration: 1301
+Line Manager Iteration: 1302
+Line Manager Iteration: 1303
+Line Manager Iteration: 1304
+Line Manager Iteration: 1305
+Line Manager Iteration: 1306
+Line Manager Iteration: 1307
+Line Manager Iteration: 1308
+Line Manager Iteration: 1309
+Line Manager Iteration: 1310
+Line Manager Iteration: 1311
+Line Manager Iteration: 1312
+Line Manager Iteration: 1313
+Line Manager Iteration: 1314
+Line Manager Iteration: 1315
+Line Manager Iteration: 1316
+Line Manager Iteration: 1317
+Line Manager Iteration: 1318
+Line Manager Iteration: 1319
+Line Manager Iteration: 1320
+Line Manager Iteration: 1321
+Line Manager Iteration: 1322
+Line Manager Iteration: 1323
+Line Manager Iteration: 1324
+Line Manager Iteration: 1325
+Line Manager Iteration: 1326
+Line Manager Iteration: 1327
+Line Manager Iteration: 1328
+Line Manager Iteration: 1329
+Line Manager Iteration: 1330
+Line Manager Iteration: 1331
+Line Manager Iteration: 1332
+Line Manager Iteration: 1333
+Line Manager Iteration: 1334
+Line Manager Iteration: 1335
+Line Manager Iteration: 1336
+Line Manager Iteration: 1337
+Line Manager Iteration: 1338
+Line Manager Iteration: 1339
+Line Manager Iteration: 1340
+Line Manager Iteration: 1341
+Line Manager Iteration: 1342
+Line Manager Iteration: 1343
+Line Manager Iteration: 1344
+Line Manager Iteration: 1345
+Line Manager Iteration: 1346
+Line Manager Iteration: 1347
+Line Manager Iteration: 1348
+Line Manager Iteration: 1349
+Line Manager Iteration: 1350
+Line Manager Iteration: 1351
+Line Manager Iteration: 1352
+Line Manager Iteration: 1353
+Line Manager Iteration: 1354
+Line Manager Iteration: 1355
+Line Manager Iteration: 1356
+Line Manager Iteration: 1357
+Line Manager Iteration: 1358
+Line Manager Iteration: 1359
+Line Manager Iteration: 1360
+Line Manager Iteration: 1361
+Line Manager Iteration: 1362
+Line Manager Iteration: 1363
+Line Manager Iteration: 1364
+Line Manager Iteration: 1365
+Line Manager Iteration: 1366
+Line Manager Iteration: 1367
+Line Manager Iteration: 1368
+Line Manager Iteration: 1369
+Line Manager Iteration: 1370
+Line Manager Iteration: 1371
+Line Manager Iteration: 1372
+Line Manager Iteration: 1373
+Line Manager Iteration: 1374
+Line Manager Iteration: 1375
+Line Manager Iteration: 1376
+Line Manager Iteration: 1377
+Line Manager Iteration: 1378
+Line Manager Iteration: 1379
+Line Manager Iteration: 1380
+Line Manager Iteration: 1381
+Line Manager Iteration: 1382
+Line Manager Iteration: 1383
+Line Manager Iteration: 1384
+Line Manager Iteration: 1385
+Line Manager Iteration: 1386
+Line Manager Iteration: 1387
+Line Manager Iteration: 1388
+Line Manager Iteration: 1389
+Line Manager Iteration: 1390
+Line Manager Iteration: 1391
+Line Manager Iteration: 1392
+Line Manager Iteration: 1393
+Line Manager Iteration: 1394
+Line Manager Iteration: 1395
+Line Manager Iteration: 1396
+Line Manager Iteration: 1397
+Line Manager Iteration: 1398
+Line Manager Iteration: 1399
+Line Manager Iteration: 1400
+Line Manager Iteration: 1401
+Line Manager Iteration: 1402
+Line Manager Iteration: 1403
+Line Manager Iteration: 1404
+Line Manager Iteration: 1405
+Line Manager Iteration: 1406
+Line Manager Iteration: 1407
+Line Manager Iteration: 1408
+Line Manager Iteration: 1409
+Line Manager Iteration: 1410
+Line Manager Iteration: 1411
+Line Manager Iteration: 1412
+Line Manager Iteration: 1413
+Line Manager Iteration: 1414
+Line Manager Iteration: 1415
+Line Manager Iteration: 1416
+Line Manager Iteration: 1417
+Line Manager Iteration: 1418
+Line Manager Iteration: 1419
+Line Manager Iteration: 1420
+Line Manager Iteration: 1421
+Line Manager Iteration: 1422
+Line Manager Iteration: 1423
+Line Manager Iteration: 1424
+Line Manager Iteration: 1425
+Line Manager Iteration: 1426
+Line Manager Iteration: 1427
+Line Manager Iteration: 1428
+Line Manager Iteration: 1429
+Line Manager Iteration: 1430
+Line Manager Iteration: 1431
+Line Manager Iteration: 1432
+Line Manager Iteration: 1433
+Line Manager Iteration: 1434
+Line Manager Iteration: 1435
+Line Manager Iteration: 1436
+Line Manager Iteration: 1437
+Line Manager Iteration: 1438
+Line Manager Iteration: 1439
+Line Manager Iteration: 1440
+Line Manager Iteration: 1441
+Line Manager Iteration: 1442
+Line Manager Iteration: 1443
+Line Manager Iteration: 1444
+Line Manager Iteration: 1445
+Line Manager Iteration: 1446
+Line Manager Iteration: 1447
+Line Manager Iteration: 1448
+Line Manager Iteration: 1449
+Line Manager Iteration: 1450
+Line Manager Iteration: 1451
+Line Manager Iteration: 1452
+Line Manager Iteration: 1453
+Line Manager Iteration: 1454
+Line Manager Iteration: 1455
+Line Manager Iteration: 1456
+Line Manager Iteration: 1457
+Line Manager Iteration: 1458
+Line Manager Iteration: 1459
+Line Manager Iteration: 1460
+Line Manager Iteration: 1461
+Line Manager Iteration: 1462
+Line Manager Iteration: 1463
+Line Manager Iteration: 1464
+Line Manager Iteration: 1465
+Line Manager Iteration: 1466
+Line Manager Iteration: 1467
+Line Manager Iteration: 1468
+Line Manager Iteration: 1469
+Line Manager Iteration: 1470
+Line Manager Iteration: 1471
+Line Manager Iteration: 1472
+Line Manager Iteration: 1473
+Line Manager Iteration: 1474
+Line Manager Iteration: 1475
+Line Manager Iteration: 1476
+Line Manager Iteration: 1477
+Line Manager Iteration: 1478
+Line Manager Iteration: 1479
+Line Manager Iteration: 1480
+Line Manager Iteration: 1481
+Line Manager Iteration: 1482
+Line Manager Iteration: 1483
+Line Manager Iteration: 1484
+Line Manager Iteration: 1485
+Line Manager Iteration: 1486
+Line Manager Iteration: 1487
+Line Manager Iteration: 1488
+Line Manager Iteration: 1489
+Line Manager Iteration: 1490
+Line Manager Iteration: 1491
+Line Manager Iteration: 1492
+Line Manager Iteration: 1493
+Line Manager Iteration: 1494
+Line Manager Iteration: 1495
+Line Manager Iteration: 1496
+Line Manager Iteration: 1497
+Line Manager Iteration: 1498
+Line Manager Iteration: 1499
+Line Manager Iteration: 1500
+Line Manager Iteration: 1501
+Line Manager Iteration: 1502
+Line Manager Iteration: 1503
+Line Manager Iteration: 1504
+Line Manager Iteration: 1505
+Line Manager Iteration: 1506
+Line Manager Iteration: 1507
+Line Manager Iteration: 1508
+Line Manager Iteration: 1509
+Line Manager Iteration: 1510
+Line Manager Iteration: 1511
+Line Manager Iteration: 1512
+Line Manager Iteration: 1513
+Line Manager Iteration: 1514
+Line Manager Iteration: 1515
+Line Manager Iteration: 1516
+Line Manager Iteration: 1517
+Line Manager Iteration: 1518
+Line Manager Iteration: 1519
+Line Manager Iteration: 1520
+Line Manager Iteration: 1521
+Line Manager Iteration: 1522
+Line Manager Iteration: 1523
+Line Manager Iteration: 1524
+Line Manager Iteration: 1525
+Line Manager Iteration: 1526
+Line Manager Iteration: 1527
+Line Manager Iteration: 1528
+Line Manager Iteration: 1529
+Line Manager Iteration: 1530
+Line Manager Iteration: 1531
+Line Manager Iteration: 1532
+Line Manager Iteration: 1533
+Line Manager Iteration: 1534
+Line Manager Iteration: 1535
+Line Manager Iteration: 1536
+Line Manager Iteration: 1537
+Line Manager Iteration: 1538
+Line Manager Iteration: 1539
+Line Manager Iteration: 1540
+Line Manager Iteration: 1541
+Line Manager Iteration: 1542
+Line Manager Iteration: 1543
+Line Manager Iteration: 1544
+Line Manager Iteration: 1545
+Line Manager Iteration: 1546
+Line Manager Iteration: 1547
+Line Manager Iteration: 1548
+Line Manager Iteration: 1549
+Line Manager Iteration: 1550
+Line Manager Iteration: 1551
+Line Manager Iteration: 1552
+Line Manager Iteration: 1553
+Line Manager Iteration: 1554
+Line Manager Iteration: 1555
+Line Manager Iteration: 1556
+Line Manager Iteration: 1557
+Line Manager Iteration: 1558
+Line Manager Iteration: 1559
+Line Manager Iteration: 1560
+Line Manager Iteration: 1561
+Line Manager Iteration: 1562
+Line Manager Iteration: 1563
+Line Manager Iteration: 1564
+Line Manager Iteration: 1565
+Line Manager Iteration: 1566
+Line Manager Iteration: 1567
+Line Manager Iteration: 1568
+Line Manager Iteration: 1569
+Line Manager Iteration: 1570
+Line Manager Iteration: 1571
+Line Manager Iteration: 1572
+Line Manager Iteration: 1573
+Line Manager Iteration: 1574
+Line Manager Iteration: 1575
+Line Manager Iteration: 1576
+Line Manager Iteration: 1577
+Line Manager Iteration: 1578
+Line Manager Iteration: 1579
+Line Manager Iteration: 1580
+Line Manager Iteration: 1581
+Line Manager Iteration: 1582
+Line Manager Iteration: 1583
+Line Manager Iteration: 1584
+Line Manager Iteration: 1585
+Line Manager Iteration: 1586
+Line Manager Iteration: 1587
+Line Manager Iteration: 1588
+Line Manager Iteration: 1589
+Line Manager Iteration: 1590
+Line Manager Iteration: 1591
+Line Manager Iteration: 1592
+Line Manager Iteration: 1593
+Line Manager Iteration: 1594
+Line Manager Iteration: 1595
+Line Manager Iteration: 1596
+Line Manager Iteration: 1597
+Line Manager Iteration: 1598
+Line Manager Iteration: 1599
+Line Manager Iteration: 1600
+Line Manager Iteration: 1601
+Line Manager Iteration: 1602
+Line Manager Iteration: 1603
+Line Manager Iteration: 1604
+Line Manager Iteration: 1605
+Line Manager Iteration: 1606
+Line Manager Iteration: 1607
+Line Manager Iteration: 1608
+Line Manager Iteration: 1609
+Line Manager Iteration: 1610
+Line Manager Iteration: 1611
+Line Manager Iteration: 1612
+Line Manager Iteration: 1613
+Line Manager Iteration: 1614
+Line Manager Iteration: 1615
+Line Manager Iteration: 1616
+Line Manager Iteration: 1617
+Line Manager Iteration: 1618
+Line Manager Iteration: 1619
+Line Manager Iteration: 1620
+Line Manager Iteration: 1621
+Line Manager Iteration: 1622
+Line Manager Iteration: 1623
+Line Manager Iteration: 1624
+Line Manager Iteration: 1625
+Line Manager Iteration: 1626
+Line Manager Iteration: 1627
+Line Manager Iteration: 1628
+Line Manager Iteration: 1629
+Line Manager Iteration: 1630
+Line Manager Iteration: 1631
+Line Manager Iteration: 1632
+Line Manager Iteration: 1633
+Line Manager Iteration: 1634
+Line Manager Iteration: 1635
+Line Manager Iteration: 1636
+Line Manager Iteration: 1637
+Line Manager Iteration: 1638
+Line Manager Iteration: 1639
+Line Manager Iteration: 1640
+Line Manager Iteration: 1641
+Line Manager Iteration: 1642
+Line Manager Iteration: 1643
+Line Manager Iteration: 1644
+Line Manager Iteration: 1645
+Line Manager Iteration: 1646
+Line Manager Iteration: 1647
+Line Manager Iteration: 1648
+Line Manager Iteration: 1649
+Line Manager Iteration: 1650
+Line Manager Iteration: 1651
+Line Manager Iteration: 1652
+Line Manager Iteration: 1653
+Line Manager Iteration: 1654
+Line Manager Iteration: 1655
+Line Manager Iteration: 1656
+Line Manager Iteration: 1657
+Line Manager Iteration: 1658
+Line Manager Iteration: 1659
+Line Manager Iteration: 1660
+Line Manager Iteration: 1661
+Line Manager Iteration: 1662
+Line Manager Iteration: 1663
+Line Manager Iteration: 1664
+Line Manager Iteration: 1665
+Line Manager Iteration: 1666
+Line Manager Iteration: 1667
+Line Manager Iteration: 1668
+Line Manager Iteration: 1669
+Line Manager Iteration: 1670
+Line Manager Iteration: 1671
+Line Manager Iteration: 1672
+Line Manager Iteration: 1673
+Line Manager Iteration: 1674
+Line Manager Iteration: 1675
+Line Manager Iteration: 1676
+Line Manager Iteration: 1677
+Line Manager Iteration: 1678
+Line Manager Iteration: 1679
+Line Manager Iteration: 1680
+Line Manager Iteration: 1681
+Line Manager Iteration: 1682
+Line Manager Iteration: 1683
+Line Manager Iteration: 1684
+Line Manager Iteration: 1685
+Line Manager Iteration: 1686
+Line Manager Iteration: 1687
+Line Manager Iteration: 1688
+Line Manager Iteration: 1689
+Line Manager Iteration: 1690
+Line Manager Iteration: 1691
+Line Manager Iteration: 1692
+Line Manager Iteration: 1693
+Line Manager Iteration: 1694
+Line Manager Iteration: 1695
+Line Manager Iteration: 1696
+Line Manager Iteration: 1697
+Line Manager Iteration: 1698
+Line Manager Iteration: 1699
+Line Manager Iteration: 1700
+Line Manager Iteration: 1701
+Line Manager Iteration: 1702
+Line Manager Iteration: 1703
+Line Manager Iteration: 1704
+Line Manager Iteration: 1705
+Line Manager Iteration: 1706
+Line Manager Iteration: 1707
+Line Manager Iteration: 1708
+Line Manager Iteration: 1709
+Line Manager Iteration: 1710
+Line Manager Iteration: 1711
+Line Manager Iteration: 1712
+Line Manager Iteration: 1713
+Line Manager Iteration: 1714
+Line Manager Iteration: 1715
+Line Manager Iteration: 1716
+Line Manager Iteration: 1717
+Line Manager Iteration: 1718
+Line Manager Iteration: 1719
+Line Manager Iteration: 1720
+Line Manager Iteration: 1721
+Line Manager Iteration: 1722
+Line Manager Iteration: 1723
+Line Manager Iteration: 1724
+Line Manager Iteration: 1725
+Line Manager Iteration: 1726
+Line Manager Iteration: 1727
+Line Manager Iteration: 1728
+Line Manager Iteration: 1729
+Line Manager Iteration: 1730
+Line Manager Iteration: 1731
+Line Manager Iteration: 1732
+Line Manager Iteration: 1733
+Line Manager Iteration: 1734
+Line Manager Iteration: 1735
+Line Manager Iteration: 1736
+Line Manager Iteration: 1737
+Line Manager Iteration: 1738
+Line Manager Iteration: 1739
+Line Manager Iteration: 1740
+Line Manager Iteration: 1741
+Line Manager Iteration: 1742
+Line Manager Iteration: 1743
+Line Manager Iteration: 1744
+Line Manager Iteration: 1745
+Line Manager Iteration: 1746
+Line Manager Iteration: 1747
+Line Manager Iteration: 1748
+Line Manager Iteration: 1749
+Line Manager Iteration: 1750
+Line Manager Iteration: 1751
+Line Manager Iteration: 1752
+Line Manager Iteration: 1753
+Line Manager Iteration: 1754
+Line Manager Iteration: 1755
+Line Manager Iteration: 1756
+Line Manager Iteration: 1757
+Line Manager Iteration: 1758
+Line Manager Iteration: 1759
+Line Manager Iteration: 1760
+Line Manager Iteration: 1761
+Line Manager Iteration: 1762
+Line Manager Iteration: 1763
+Line Manager Iteration: 1764
+Line Manager Iteration: 1765
+Line Manager Iteration: 1766
+Line Manager Iteration: 1767
+Line Manager Iteration: 1768
+Line Manager Iteration: 1769
+Line Manager Iteration: 1770
+Line Manager Iteration: 1771
+Line Manager Iteration: 1772
+Line Manager Iteration: 1773
+Line Manager Iteration: 1774
+Line Manager Iteration: 1775
+Line Manager Iteration: 1776
+Line Manager Iteration: 1777
+Line Manager Iteration: 1778
+Line Manager Iteration: 1779
+Line Manager Iteration: 1780
+Line Manager Iteration: 1781
+Line Manager Iteration: 1782
+Line Manager Iteration: 1783
+Line Manager Iteration: 1784
+Line Manager Iteration: 1785
+Line Manager Iteration: 1786
+Line Manager Iteration: 1787
+Line Manager Iteration: 1788
+Line Manager Iteration: 1789
+Line Manager Iteration: 1790
+Line Manager Iteration: 1791
+Line Manager Iteration: 1792
+Line Manager Iteration: 1793
+Line Manager Iteration: 1794
+Line Manager Iteration: 1795
+Line Manager Iteration: 1796
+Line Manager Iteration: 1797
+Line Manager Iteration: 1798
+Line Manager Iteration: 1799
+Line Manager Iteration: 1800
+Line Manager Iteration: 1801
+Line Manager Iteration: 1802
+Line Manager Iteration: 1803
+Line Manager Iteration: 1804
+Line Manager Iteration: 1805
+Line Manager Iteration: 1806
+Line Manager Iteration: 1807
+Line Manager Iteration: 1808
+Line Manager Iteration: 1809
+Line Manager Iteration: 1810
+Line Manager Iteration: 1811
+Line Manager Iteration: 1812
+Line Manager Iteration: 1813
+Line Manager Iteration: 1814
+Line Manager Iteration: 1815
+Line Manager Iteration: 1816
+Line Manager Iteration: 1817
+Line Manager Iteration: 1818
+Line Manager Iteration: 1819
+Line Manager Iteration: 1820
+Line Manager Iteration: 1821
+Line Manager Iteration: 1822
+Line Manager Iteration: 1823
+Line Manager Iteration: 1824
+Line Manager Iteration: 1825
+Line Manager Iteration: 1826
+Line Manager Iteration: 1827
+Line Manager Iteration: 1828
+Line Manager Iteration: 1829
+Line Manager Iteration: 1830
+Line Manager Iteration: 1831
+Line Manager Iteration: 1832
+Line Manager Iteration: 1833
+Line Manager Iteration: 1834
+Line Manager Iteration: 1835
+Line Manager Iteration: 1836
+Line Manager Iteration: 1837
+Line Manager Iteration: 1838
+Line Manager Iteration: 1839
+Line Manager Iteration: 1840
+Line Manager Iteration: 1841
+Line Manager Iteration: 1842
+Line Manager Iteration: 1843
+Line Manager Iteration: 1844
+Line Manager Iteration: 1845
+Line Manager Iteration: 1846
+Line Manager Iteration: 1847
+Line Manager Iteration: 1848
+Line Manager Iteration: 1849
+Line Manager Iteration: 1850
+Line Manager Iteration: 1851
+Line Manager Iteration: 1852
+Line Manager Iteration: 1853
+Line Manager Iteration: 1854
+Line Manager Iteration: 1855
+Line Manager Iteration: 1856
+Line Manager Iteration: 1857
+Line Manager Iteration: 1858
+Line Manager Iteration: 1859
+Line Manager Iteration: 1860
+Line Manager Iteration: 1861
+Line Manager Iteration: 1862
+Line Manager Iteration: 1863
+Line Manager Iteration: 1864
+Line Manager Iteration: 1865
+Line Manager Iteration: 1866
+Line Manager Iteration: 1867
+Line Manager Iteration: 1868
+Line Manager Iteration: 1869
+Line Manager Iteration: 1870
+Line Manager Iteration: 1871
+Line Manager Iteration: 1872
+Line Manager Iteration: 1873
+Line Manager Iteration: 1874
+Line Manager Iteration: 1875
+Line Manager Iteration: 1876
+Line Manager Iteration: 1877
+Line Manager Iteration: 1878
+Line Manager Iteration: 1879
+Line Manager Iteration: 1880
+Line Manager Iteration: 1881
+Line Manager Iteration: 1882
+Line Manager Iteration: 1883
+Line Manager Iteration: 1884
+Line Manager Iteration: 1885
+Line Manager Iteration: 1886
+Line Manager Iteration: 1887
+Line Manager Iteration: 1888
+Line Manager Iteration: 1889
+Line Manager Iteration: 1890
+Line Manager Iteration: 1891
+Line Manager Iteration: 1892
+Line Manager Iteration: 1893
+Line Manager Iteration: 1894
+Line Manager Iteration: 1895
+Line Manager Iteration: 1896
+Line Manager Iteration: 1897
+Line Manager Iteration: 1898
+Line Manager Iteration: 1899
+Line Manager Iteration: 1900
+Line Manager Iteration: 1901
+Line Manager Iteration: 1902
+Line Manager Iteration: 1903
+Line Manager Iteration: 1904
+Line Manager Iteration: 1905
+Line Manager Iteration: 1906
+Line Manager Iteration: 1907
+Line Manager Iteration: 1908
+Line Manager Iteration: 1909
+Line Manager Iteration: 1910
+Line Manager Iteration: 1911
+Line Manager Iteration: 1912
+Line Manager Iteration: 1913
+Line Manager Iteration: 1914
+Line Manager Iteration: 1915
+Line Manager Iteration: 1916
+Line Manager Iteration: 1917
+Line Manager Iteration: 1918
+Line Manager Iteration: 1919
+Line Manager Iteration: 1920
+Line Manager Iteration: 1921
+Line Manager Iteration: 1922
+Line Manager Iteration: 1923
+Line Manager Iteration: 1924
+Line Manager Iteration: 1925
+Line Manager Iteration: 1926
+Line Manager Iteration: 1927
+Line Manager Iteration: 1928
+Line Manager Iteration: 1929
+Line Manager Iteration: 1930
+Line Manager Iteration: 1931
+Line Manager Iteration: 1932
+Line Manager Iteration: 1933
+Line Manager Iteration: 1934
+Line Manager Iteration: 1935
+Line Manager Iteration: 1936
+Line Manager Iteration: 1937
+Line Manager Iteration: 1938
+Line Manager Iteration: 1939
+Line Manager Iteration: 1940
+Line Manager Iteration: 1941
+Line Manager Iteration: 1942
+Line Manager Iteration: 1943
+Line Manager Iteration: 1944
+Line Manager Iteration: 1945
+Line Manager Iteration: 1946
+Line Manager Iteration: 1947
+Line Manager Iteration: 1948
+Line Manager Iteration: 1949
+Line Manager Iteration: 1950
+Line Manager Iteration: 1951
+Line Manager Iteration: 1952
+Line Manager Iteration: 1953
+Line Manager Iteration: 1954
+Line Manager Iteration: 1955
+Line Manager Iteration: 1956
+Line Manager Iteration: 1957
+Line Manager Iteration: 1958
+Line Manager Iteration: 1959
+Line Manager Iteration: 1960
+Line Manager Iteration: 1961
+Line Manager Iteration: 1962
+Line Manager Iteration: 1963
+Line Manager Iteration: 1964
+Line Manager Iteration: 1965
+Line Manager Iteration: 1966
+Line Manager Iteration: 1967
+Line Manager Iteration: 1968
+Line Manager Iteration: 1969
+Line Manager Iteration: 1970
+Line Manager Iteration: 1971
+Line Manager Iteration: 1972
+Line Manager Iteration: 1973
+Line Manager Iteration: 1974
+Line Manager Iteration: 1975
+Line Manager Iteration: 1976
+Line Manager Iteration: 1977
+Line Manager Iteration: 1978
+Line Manager Iteration: 1979
+Line Manager Iteration: 1980
+Line Manager Iteration: 1981
+Line Manager Iteration: 1982
+Line Manager Iteration: 1983
+Line Manager Iteration: 1984
+Line Manager Iteration: 1985
+Line Manager Iteration: 1986
+Line Manager Iteration: 1987
+Line Manager Iteration: 1988
+Line Manager Iteration: 1989
+Line Manager Iteration: 1990
+Line Manager Iteration: 1991
+Line Manager Iteration: 1992
+Line Manager Iteration: 1993
+Line Manager Iteration: 1994
+Line Manager Iteration: 1995
+Line Manager Iteration: 1996
+Line Manager Iteration: 1997
+Line Manager Iteration: 1998
+Line Manager Iteration: 1999
+Line Manager Iteration: 2000
+Line Manager Iteration: 2001
+Line Manager Iteration: 2002
+Line Manager Iteration: 2003
+Line Manager Iteration: 2004
+Line Manager Iteration: 2005
+Line Manager Iteration: 2006
+Line Manager Iteration: 2007
+Line Manager Iteration: 2008
+Line Manager Iteration: 2009
+Line Manager Iteration: 2010
+Line Manager Iteration: 2011
+Line Manager Iteration: 2012
+Line Manager Iteration: 2013
+Line Manager Iteration: 2014
+Line Manager Iteration: 2015
+Line Manager Iteration: 2016
+Line Manager Iteration: 2017
+Line Manager Iteration: 2018
+Line Manager Iteration: 2019
+Line Manager Iteration: 2020
+Line Manager Iteration: 2021
+Line Manager Iteration: 2022
+Line Manager Iteration: 2023
+Line Manager Iteration: 2024
+Line Manager Iteration: 2025
+Line Manager Iteration: 2026
+Line Manager Iteration: 2027
+Line Manager Iteration: 2028
+Line Manager Iteration: 2029
+Line Manager Iteration: 2030
+Line Manager Iteration: 2031
+Line Manager Iteration: 2032
+Line Manager Iteration: 2033
+Line Manager Iteration: 2034
+Line Manager Iteration: 2035
+Line Manager Iteration: 2036
+Line Manager Iteration: 2037
+Line Manager Iteration: 2038
+Line Manager Iteration: 2039
+Line Manager Iteration: 2040
+Line Manager Iteration: 2041
+Line Manager Iteration: 2042
+Line Manager Iteration: 2043
+Line Manager Iteration: 2044
+Line Manager Iteration: 2045
+Line Manager Iteration: 2046
+Line Manager Iteration: 2047
+Line Manager Iteration: 2048
+Line Manager Iteration: 2049
+Line Manager Iteration: 2050
+Line Manager Iteration: 2051
+Line Manager Iteration: 2052
+Line Manager Iteration: 2053
+Line Manager Iteration: 2054
+Line Manager Iteration: 2055
+Line Manager Iteration: 2056
+Line Manager Iteration: 2057
+Line Manager Iteration: 2058
+Line Manager Iteration: 2059
+Line Manager Iteration: 2060
+Line Manager Iteration: 2061
+Line Manager Iteration: 2062
+Line Manager Iteration: 2063
+Line Manager Iteration: 2064
+Line Manager Iteration: 2065
+Line Manager Iteration: 2066
+Line Manager Iteration: 2067
+Line Manager Iteration: 2068
+Line Manager Iteration: 2069
+Line Manager Iteration: 2070
+Line Manager Iteration: 2071
+Line Manager Iteration: 2072
+Line Manager Iteration: 2073
+Line Manager Iteration: 2074
+Line Manager Iteration: 2075
+Line Manager Iteration: 2076
+Line Manager Iteration: 2077
+Line Manager Iteration: 2078
+Line Manager Iteration: 2079
+Line Manager Iteration: 2080
+Line Manager Iteration: 2081
+Line Manager Iteration: 2082
+Line Manager Iteration: 2083
+Line Manager Iteration: 2084
+Line Manager Iteration: 2085
+Line Manager Iteration: 2086
+Line Manager Iteration: 2087
+Line Manager Iteration: 2088
+Line Manager Iteration: 2089
+Line Manager Iteration: 2090
+Line Manager Iteration: 2091
+Line Manager Iteration: 2092
+Line Manager Iteration: 2093
+Line Manager Iteration: 2094
+Line Manager Iteration: 2095
+Line Manager Iteration: 2096
+Line Manager Iteration: 2097
+Line Manager Iteration: 2098
+Line Manager Iteration: 2099
+Line Manager Iteration: 2100
+Line Manager Iteration: 2101
+Line Manager Iteration: 2102
+Line Manager Iteration: 2103
+Line Manager Iteration: 2104
+Line Manager Iteration: 2105
+Line Manager Iteration: 2106
+Line Manager Iteration: 2107
+Line Manager Iteration: 2108
+Line Manager Iteration: 2109
+Line Manager Iteration: 2110
+Line Manager Iteration: 2111
+Line Manager Iteration: 2112
+Line Manager Iteration: 2113
+Line Manager Iteration: 2114
+Line Manager Iteration: 2115
+Line Manager Iteration: 2116
+Line Manager Iteration: 2117
+Line Manager Iteration: 2118
+Line Manager Iteration: 2119
+Line Manager Iteration: 2120
+Line Manager Iteration: 2121
+Line Manager Iteration: 2122
+Line Manager Iteration: 2123
+Line Manager Iteration: 2124
+Line Manager Iteration: 2125
+Line Manager Iteration: 2126
+Line Manager Iteration: 2127
+Line Manager Iteration: 2128
+Line Manager Iteration: 2129
+Line Manager Iteration: 2130
+Line Manager Iteration: 2131
+Line Manager Iteration: 2132
+Line Manager Iteration: 2133
+Line Manager Iteration: 2134
+Line Manager Iteration: 2135
+Line Manager Iteration: 2136
+Line Manager Iteration: 2137
+Line Manager Iteration: 2138
+Line Manager Iteration: 2139
+Line Manager Iteration: 2140
+Line Manager Iteration: 2141
+Line Manager Iteration: 2142
+Line Manager Iteration: 2143
+Line Manager Iteration: 2144
+Line Manager Iteration: 2145
+Line Manager Iteration: 2146
+Line Manager Iteration: 2147
+Line Manager Iteration: 2148
+Line Manager Iteration: 2149
+Line Manager Iteration: 2150
+Line Manager Iteration: 2151
+Line Manager Iteration: 2152
+Line Manager Iteration: 2153
+Line Manager Iteration: 2154
+Line Manager Iteration: 2155
+Line Manager Iteration: 2156
+Line Manager Iteration: 2157
+Line Manager Iteration: 2158
+Line Manager Iteration: 2159
+Line Manager Iteration: 2160
+Line Manager Iteration: 2161
+Line Manager Iteration: 2162
+Line Manager Iteration: 2163
+Line Manager Iteration: 2164
+Line Manager Iteration: 2165
+Line Manager Iteration: 2166
+Line Manager Iteration: 2167
+Line Manager Iteration: 2168
+Line Manager Iteration: 2169
+Line Manager Iteration: 2170
+Line Manager Iteration: 2171
+Line Manager Iteration: 2172
+Line Manager Iteration: 2173
+Line Manager Iteration: 2174
+Line Manager Iteration: 2175
+Line Manager Iteration: 2176
+Line Manager Iteration: 2177
+Line Manager Iteration: 2178
+Line Manager Iteration: 2179
+Line Manager Iteration: 2180
+Line Manager Iteration: 2181
+Line Manager Iteration: 2182
+Line Manager Iteration: 2183
+Line Manager Iteration: 2184
+Line Manager Iteration: 2185
+Line Manager Iteration: 2186
+Line Manager Iteration: 2187
+Line Manager Iteration: 2188
+Line Manager Iteration: 2189
+Line Manager Iteration: 2190
+Line Manager Iteration: 2191
+Line Manager Iteration: 2192
+Line Manager Iteration: 2193
+Line Manager Iteration: 2194
+Line Manager Iteration: 2195
+Line Manager Iteration: 2196
+Line Manager Iteration: 2197
+Line Manager Iteration: 2198
+Line Manager Iteration: 2199
+Line Manager Iteration: 2200
+Line Manager Iteration: 2201
+Line Manager Iteration: 2202
+Line Manager Iteration: 2203
+Line Manager Iteration: 2204
+Line Manager Iteration: 2205
+Line Manager Iteration: 2206
+Line Manager Iteration: 2207
+Line Manager Iteration: 2208
+Line Manager Iteration: 2209
+Line Manager Iteration: 2210
+Line Manager Iteration: 2211
+Line Manager Iteration: 2212
+Line Manager Iteration: 2213
+Line Manager Iteration: 2214
+Line Manager Iteration: 2215
+Line Manager Iteration: 2216
+Line Manager Iteration: 2217
+Line Manager Iteration: 2218
+Line Manager Iteration: 2219
+Line Manager Iteration: 2220
+Line Manager Iteration: 2221
+Line Manager Iteration: 2222
+Line Manager Iteration: 2223
+Line Manager Iteration: 2224
+Line Manager Iteration: 2225
+Line Manager Iteration: 2226
+Line Manager Iteration: 2227
+Line Manager Iteration: 2228
+Line Manager Iteration: 2229
+Line Manager Iteration: 2230
+Line Manager Iteration: 2231
+Line Manager Iteration: 2232
+Line Manager Iteration: 2233
+Line Manager Iteration: 2234
+Line Manager Iteration: 2235
+Line Manager Iteration: 2236
+Line Manager Iteration: 2237
+Line Manager Iteration: 2238
+Line Manager Iteration: 2239
+Line Manager Iteration: 2240
+Line Manager Iteration: 2241
+Line Manager Iteration: 2242
+Line Manager Iteration: 2243
+Line Manager Iteration: 2244
+Line Manager Iteration: 2245
+Line Manager Iteration: 2246
+Line Manager Iteration: 2247
+Line Manager Iteration: 2248
+Line Manager Iteration: 2249
+Line Manager Iteration: 2250
+Line Manager Iteration: 2251
+Line Manager Iteration: 2252
+Line Manager Iteration: 2253
+Line Manager Iteration: 2254
+Line Manager Iteration: 2255
+Line Manager Iteration: 2256
+Line Manager Iteration: 2257
+Line Manager Iteration: 2258
+Line Manager Iteration: 2259
+Line Manager Iteration: 2260
+Line Manager Iteration: 2261
+Line Manager Iteration: 2262
+Line Manager Iteration: 2263
+Line Manager Iteration: 2264
+Line Manager Iteration: 2265
+Line Manager Iteration: 2266
+Line Manager Iteration: 2267
+Line Manager Iteration: 2268
+Line Manager Iteration: 2269
+Line Manager Iteration: 2270
+Line Manager Iteration: 2271
+Line Manager Iteration: 2272
+Line Manager Iteration: 2273
+Line Manager Iteration: 2274
+Line Manager Iteration: 2275
+Line Manager Iteration: 2276
+Line Manager Iteration: 2277
+Line Manager Iteration: 2278
+Line Manager Iteration: 2279
+Line Manager Iteration: 2280
+Line Manager Iteration: 2281
+Line Manager Iteration: 2282
+Line Manager Iteration: 2283
+Line Manager Iteration: 2284
+Line Manager Iteration: 2285
+Line Manager Iteration: 2286
+Line Manager Iteration: 2287
+Line Manager Iteration: 2288
+Line Manager Iteration: 2289
+Line Manager Iteration: 2290
+Line Manager Iteration: 2291
+Line Manager Iteration: 2292
+Line Manager Iteration: 2293
+Line Manager Iteration: 2294
+Line Manager Iteration: 2295
+Line Manager Iteration: 2296
+Line Manager Iteration: 2297
+Line Manager Iteration: 2298
+Line Manager Iteration: 2299
+Line Manager Iteration: 2300
+Line Manager Iteration: 2301
+Line Manager Iteration: 2302
+Line Manager Iteration: 2303
+Line Manager Iteration: 2304
+Line Manager Iteration: 2305
+Line Manager Iteration: 2306
+Line Manager Iteration: 2307
+Line Manager Iteration: 2308
+Line Manager Iteration: 2309
+Line Manager Iteration: 2310
+Line Manager Iteration: 2311
+Line Manager Iteration: 2312
+Line Manager Iteration: 2313
+Line Manager Iteration: 2314
+Line Manager Iteration: 2315
+Line Manager Iteration: 2316
+Line Manager Iteration: 2317
+Line Manager Iteration: 2318
+Line Manager Iteration: 2319
+Line Manager Iteration: 2320
+Line Manager Iteration: 2321
+Line Manager Iteration: 2322
+Line Manager Iteration: 2323
+Line Manager Iteration: 2324
+Line Manager Iteration: 2325
+Line Manager Iteration: 2326
+Line Manager Iteration: 2327
+Line Manager Iteration: 2328
+Line Manager Iteration: 2329
+Line Manager Iteration: 2330
+Line Manager Iteration: 2331
+Line Manager Iteration: 2332
+Line Manager Iteration: 2333
+Line Manager Iteration: 2334
+Line Manager Iteration: 2335
+Line Manager Iteration: 2336
+Line Manager Iteration: 2337
+Line Manager Iteration: 2338
+Line Manager Iteration: 2339
+Line Manager Iteration: 2340
+Line Manager Iteration: 2341
+Line Manager Iteration: 2342
+Line Manager Iteration: 2343
+Line Manager Iteration: 2344
+Line Manager Iteration: 2345
+Line Manager Iteration: 2346
+Line Manager Iteration: 2347
+Line Manager Iteration: 2348
+Line Manager Iteration: 2349
+Line Manager Iteration: 2350
+Line Manager Iteration: 2351
+Line Manager Iteration: 2352
+Line Manager Iteration: 2353
+Line Manager Iteration: 2354
+Line Manager Iteration: 2355
+Line Manager Iteration: 2356
+Line Manager Iteration: 2357
+Line Manager Iteration: 2358
+Line Manager Iteration: 2359
+Line Manager Iteration: 2360
+Line Manager Iteration: 2361
+Line Manager Iteration: 2362
+Line Manager Iteration: 2363
+Line Manager Iteration: 2364
+Line Manager Iteration: 2365
+Line Manager Iteration: 2366
+Line Manager Iteration: 2367
+Line Manager Iteration: 2368
+Line Manager Iteration: 2369
+Line Manager Iteration: 2370
+Line Manager Iteration: 2371
+Line Manager Iteration: 2372
+Line Manager Iteration: 2373
+Line Manager Iteration: 2374
+Line Manager Iteration: 2375
+Line Manager Iteration: 2376
+Line Manager Iteration: 2377
+Line Manager Iteration: 2378
+Line Manager Iteration: 2379
+Line Manager Iteration: 2380
+Line Manager Iteration: 2381
+Line Manager Iteration: 2382
+Line Manager Iteration: 2383
+Line Manager Iteration: 2384
+Line Manager Iteration: 2385
+Line Manager Iteration: 2386
+Line Manager Iteration: 2387
+Line Manager Iteration: 2388
+Line Manager Iteration: 2389
+Line Manager Iteration: 2390
+Line Manager Iteration: 2391
+Line Manager Iteration: 2392
+Line Manager Iteration: 2393
+Line Manager Iteration: 2394
+Line Manager Iteration: 2395
+Line Manager Iteration: 2396
+Line Manager Iteration: 2397
+Line Manager Iteration: 2398
+Line Manager Iteration: 2399
+Line Manager Iteration: 2400
+Line Manager Iteration: 2401
+Line Manager Iteration: 2402
+Line Manager Iteration: 2403
+Line Manager Iteration: 2404
+Line Manager Iteration: 2405
+Line Manager Iteration: 2406
+Line Manager Iteration: 2407
+Line Manager Iteration: 2408
+Line Manager Iteration: 2409
+Line Manager Iteration: 2410
+Line Manager Iteration: 2411
+Line Manager Iteration: 2412
+Line Manager Iteration: 2413
+Line Manager Iteration: 2414
+Line Manager Iteration: 2415
+Line Manager Iteration: 2416
+Line Manager Iteration: 2417
+Line Manager Iteration: 2418
+Line Manager Iteration: 2419
+Line Manager Iteration: 2420
+Line Manager Iteration: 2421
+Line Manager Iteration: 2422
+Line Manager Iteration: 2423
+Line Manager Iteration: 2424
+Line Manager Iteration: 2425
+Line Manager Iteration: 2426
+Line Manager Iteration: 2427
+Line Manager Iteration: 2428
+Line Manager Iteration: 2429
+Line Manager Iteration: 2430
+Line Manager Iteration: 2431
+Line Manager Iteration: 2432
+Line Manager Iteration: 2433
+Line Manager Iteration: 2434
+Line Manager Iteration: 2435
+Line Manager Iteration: 2436
+Line Manager Iteration: 2437
+Line Manager Iteration: 2438
+Line Manager Iteration: 2439
+Line Manager Iteration: 2440
+Line Manager Iteration: 2441
+Line Manager Iteration: 2442
+Line Manager Iteration: 2443
+Line Manager Iteration: 2444
+Line Manager Iteration: 2445
+Line Manager Iteration: 2446
+Line Manager Iteration: 2447
+Line Manager Iteration: 2448
+Line Manager Iteration: 2449
+Line Manager Iteration: 2450
+Line Manager Iteration: 2451
+Line Manager Iteration: 2452
+Line Manager Iteration: 2453
+Line Manager Iteration: 2454
+Line Manager Iteration: 2455
+Line Manager Iteration: 2456
+Line Manager Iteration: 2457
+Line Manager Iteration: 2458
+Line Manager Iteration: 2459
+Line Manager Iteration: 2460
+Line Manager Iteration: 2461
+Line Manager Iteration: 2462
+Line Manager Iteration: 2463
+Line Manager Iteration: 2464
+Line Manager Iteration: 2465
+Line Manager Iteration: 2466
+Line Manager Iteration: 2467
+Line Manager Iteration: 2468
+Line Manager Iteration: 2469
+Line Manager Iteration: 2470
+Line Manager Iteration: 2471
+Line Manager Iteration: 2472
+Line Manager Iteration: 2473
+Line Manager Iteration: 2474
+Line Manager Iteration: 2475
+Line Manager Iteration: 2476
+Line Manager Iteration: 2477
+Line Manager Iteration: 2478
+Line Manager Iteration: 2479
+Line Manager Iteration: 2480
+Line Manager Iteration: 2481
+Line Manager Iteration: 2482
+Line Manager Iteration: 2483
+Line Manager Iteration: 2484
+Line Manager Iteration: 2485
+Line Manager Iteration: 2486
+Line Manager Iteration: 2487
+Line Manager Iteration: 2488
+Line Manager Iteration: 2489
+Line Manager Iteration: 2490
+Line Manager Iteration: 2491
+Line Manager Iteration: 2492
+Line Manager Iteration: 2493
+Line Manager Iteration: 2494
+Line Manager Iteration: 2495
+Line Manager Iteration: 2496
+Line Manager Iteration: 2497
+Line Manager Iteration: 2498
+Line Manager Iteration: 2499
+Line Manager Iteration: 2500
+Line Manager Iteration: 2501
+Line Manager Iteration: 2502
+Line Manager Iteration: 2503
+Line Manager Iteration: 2504
+Line Manager Iteration: 2505
+Line Manager Iteration: 2506
+Line Manager Iteration: 2507
+Line Manager Iteration: 2508
+Line Manager Iteration: 2509
+Line Manager Iteration: 2510
+Line Manager Iteration: 2511
+Line Manager Iteration: 2512
+Line Manager Iteration: 2513
+Line Manager Iteration: 2514
+Line Manager Iteration: 2515
+Line Manager Iteration: 2516
+Line Manager Iteration: 2517
+Line Manager Iteration: 2518
+Line Manager Iteration: 2519
+Line Manager Iteration: 2520
+Line Manager Iteration: 2521
+Line Manager Iteration: 2522
+Line Manager Iteration: 2523
+Line Manager Iteration: 2524
+Line Manager Iteration: 2525
+Line Manager Iteration: 2526
+Line Manager Iteration: 2527
+Line Manager Iteration: 2528
+Line Manager Iteration: 2529
+Line Manager Iteration: 2530
+Line Manager Iteration: 2531
+Line Manager Iteration: 2532
+Line Manager Iteration: 2533
+Line Manager Iteration: 2534
+Line Manager Iteration: 2535
+Line Manager Iteration: 2536
+Line Manager Iteration: 2537
+Line Manager Iteration: 2538
+Line Manager Iteration: 2539
+Line Manager Iteration: 2540
+Line Manager Iteration: 2541
+Line Manager Iteration: 2542
+Line Manager Iteration: 2543
+Line Manager Iteration: 2544
+Line Manager Iteration: 2545
+Line Manager Iteration: 2546
+Line Manager Iteration: 2547
+Line Manager Iteration: 2548
+Line Manager Iteration: 2549
+Line Manager Iteration: 2550
+Line Manager Iteration: 2551
+Line Manager Iteration: 2552
+Line Manager Iteration: 2553
+Line Manager Iteration: 2554
+Line Manager Iteration: 2555
+Line Manager Iteration: 2556
+Line Manager Iteration: 2557
+Line Manager Iteration: 2558
+Line Manager Iteration: 2559
+Line Manager Iteration: 2560
+Line Manager Iteration: 2561
+Line Manager Iteration: 2562
+Line Manager Iteration: 2563
+Line Manager Iteration: 2564
+Line Manager Iteration: 2565
+Line Manager Iteration: 2566
+Line Manager Iteration: 2567
+Line Manager Iteration: 2568
+Line Manager Iteration: 2569
+Line Manager Iteration: 2570
+Line Manager Iteration: 2571
+Line Manager Iteration: 2572
+Line Manager Iteration: 2573
+Line Manager Iteration: 2574
+Line Manager Iteration: 2575
+Line Manager Iteration: 2576
+Line Manager Iteration: 2577
+Line Manager Iteration: 2578
+Line Manager Iteration: 2579
+Line Manager Iteration: 2580
+Line Manager Iteration: 2581
+Line Manager Iteration: 2582
+Line Manager Iteration: 2583
+Line Manager Iteration: 2584
+Line Manager Iteration: 2585
+Line Manager Iteration: 2586
+Line Manager Iteration: 2587
+Line Manager Iteration: 2588
+Line Manager Iteration: 2589
+Line Manager Iteration: 2590
+Line Manager Iteration: 2591
+Line Manager Iteration: 2592
+Line Manager Iteration: 2593
+Line Manager Iteration: 2594
+Line Manager Iteration: 2595
+Line Manager Iteration: 2596
+Line Manager Iteration: 2597
+Line Manager Iteration: 2598
+Line Manager Iteration: 2599
+Line Manager Iteration: 2600
+Line Manager Iteration: 2601
+Line Manager Iteration: 2602
+Line Manager Iteration: 2603
+Line Manager Iteration: 2604
+Line Manager Iteration: 2605
+Line Manager Iteration: 2606
+Line Manager Iteration: 2607
+Line Manager Iteration: 2608
+Line Manager Iteration: 2609
+Line Manager Iteration: 2610
+Line Manager Iteration: 2611
+Line Manager Iteration: 2612
+Line Manager Iteration: 2613
+Line Manager Iteration: 2614
+Line Manager Iteration: 2615
+Line Manager Iteration: 2616
+Line Manager Iteration: 2617
+Line Manager Iteration: 2618
+Line Manager Iteration: 2619
+Line Manager Iteration: 2620
+Line Manager Iteration: 2621
+Line Manager Iteration: 2622
+Line Manager Iteration: 2623
+Line Manager Iteration: 2624
+Line Manager Iteration: 2625
+Line Manager Iteration: 2626
+Line Manager Iteration: 2627
+Line Manager Iteration: 2628
+Line Manager Iteration: 2629
+Line Manager Iteration: 2630
+Line Manager Iteration: 2631
+Line Manager Iteration: 2632
+Line Manager Iteration: 2633
+Line Manager Iteration: 2634
+Line Manager Iteration: 2635
+Line Manager Iteration: 2636
+Line Manager Iteration: 2637
+Line Manager Iteration: 2638
+Line Manager Iteration: 2639
+Line Manager Iteration: 2640
+Line Manager Iteration: 2641
+Line Manager Iteration: 2642
+Line Manager Iteration: 2643
+Line Manager Iteration: 2644
+Line Manager Iteration: 2645
+Line Manager Iteration: 2646
+Line Manager Iteration: 2647
+Line Manager Iteration: 2648
+Line Manager Iteration: 2649
+Line Manager Iteration: 2650
+Line Manager Iteration: 2651
+Line Manager Iteration: 2652
+Line Manager Iteration: 2653
+Line Manager Iteration: 2654
+Line Manager Iteration: 2655
+Line Manager Iteration: 2656
+Line Manager Iteration: 2657
+Line Manager Iteration: 2658
+Line Manager Iteration: 2659
+Line Manager Iteration: 2660
+Line Manager Iteration: 2661
+Line Manager Iteration: 2662
+Line Manager Iteration: 2663
+Line Manager Iteration: 2664
+Line Manager Iteration: 2665
+Line Manager Iteration: 2666
+Line Manager Iteration: 2667
+Line Manager Iteration: 2668
+Line Manager Iteration: 2669
+Line Manager Iteration: 2670
+Line Manager Iteration: 2671
+Line Manager Iteration: 2672
+Line Manager Iteration: 2673
+Line Manager Iteration: 2674
+Line Manager Iteration: 2675
+Line Manager Iteration: 2676
+Line Manager Iteration: 2677
+Line Manager Iteration: 2678
+Line Manager Iteration: 2679
+Line Manager Iteration: 2680
+Line Manager Iteration: 2681
+Line Manager Iteration: 2682
+Line Manager Iteration: 2683
+Line Manager Iteration: 2684
+Line Manager Iteration: 2685
+Line Manager Iteration: 2686
+Line Manager Iteration: 2687
+Line Manager Iteration: 2688
+Line Manager Iteration: 2689
+Line Manager Iteration: 2690
+Line Manager Iteration: 2691
+Line Manager Iteration: 2692
+Line Manager Iteration: 2693
+Line Manager Iteration: 2694
+Line Manager Iteration: 2695
+Line Manager Iteration: 2696
+Line Manager Iteration: 2697
+Line Manager Iteration: 2698
+Line Manager Iteration: 2699
+Line Manager Iteration: 2700
+Line Manager Iteration: 2701
+Line Manager Iteration: 2702
+Line Manager Iteration: 2703
+Line Manager Iteration: 2704
+Line Manager Iteration: 2705
+Line Manager Iteration: 2706
+Line Manager Iteration: 2707
+Line Manager Iteration: 2708
+Line Manager Iteration: 2709
+Line Manager Iteration: 2710
+Line Manager Iteration: 2711
+Line Manager Iteration: 2712
+Line Manager Iteration: 2713
+Line Manager Iteration: 2714
+Line Manager Iteration: 2715
+Line Manager Iteration: 2716
+Line Manager Iteration: 2717
+Line Manager Iteration: 2718
+Line Manager Iteration: 2719
+Line Manager Iteration: 2720
+Line Manager Iteration: 2721
+Line Manager Iteration: 2722
+Line Manager Iteration: 2723
+Line Manager Iteration: 2724
+Line Manager Iteration: 2725
+Line Manager Iteration: 2726
+Line Manager Iteration: 2727
+Line Manager Iteration: 2728
+Line Manager Iteration: 2729
+Line Manager Iteration: 2730
+Line Manager Iteration: 2731
+Line Manager Iteration: 2732
+Line Manager Iteration: 2733
+Line Manager Iteration: 2734
+Line Manager Iteration: 2735
+Line Manager Iteration: 2736
+Line Manager Iteration: 2737
+Line Manager Iteration: 2738
+Line Manager Iteration: 2739
+Line Manager Iteration: 2740
+Line Manager Iteration: 2741
+Line Manager Iteration: 2742
+Line Manager Iteration: 2743
+Line Manager Iteration: 2744
+Line Manager Iteration: 2745
+Line Manager Iteration: 2746
+Line Manager Iteration: 2747
+Line Manager Iteration: 2748
+Line Manager Iteration: 2749
+Line Manager Iteration: 2750
+Line Manager Iteration: 2751
+Line Manager Iteration: 2752
+Line Manager Iteration: 2753
+Line Manager Iteration: 2754
+Line Manager Iteration: 2755
+Line Manager Iteration: 2756
+Line Manager Iteration: 2757
+Line Manager Iteration: 2758
+Line Manager Iteration: 2759
+Line Manager Iteration: 2760
+Line Manager Iteration: 2761
+Line Manager Iteration: 2762
+Line Manager Iteration: 2763
+Line Manager Iteration: 2764
+Line Manager Iteration: 2765
+Line Manager Iteration: 2766
+Line Manager Iteration: 2767
+Line Manager Iteration: 2768
+Line Manager Iteration: 2769
+Line Manager Iteration: 2770
+Line Manager Iteration: 2771
+Line Manager Iteration: 2772
+Line Manager Iteration: 2773
+Line Manager Iteration: 2774
+Line Manager Iteration: 2775
+Line Manager Iteration: 2776
+Line Manager Iteration: 2777
+Line Manager Iteration: 2778
+Line Manager Iteration: 2779
+Line Manager Iteration: 2780
+Line Manager Iteration: 2781
+Line Manager Iteration: 2782
+Line Manager Iteration: 2783
+Line Manager Iteration: 2784
+Line Manager Iteration: 2785
+Line Manager Iteration: 2786
+Line Manager Iteration: 2787
+Line Manager Iteration: 2788
+Line Manager Iteration: 2789
+Line Manager Iteration: 2790
+Line Manager Iteration: 2791
+Line Manager Iteration: 2792
+Line Manager Iteration: 2793
+Line Manager Iteration: 2794
+Line Manager Iteration: 2795
+Line Manager Iteration: 2796
+Line Manager Iteration: 2797
+Line Manager Iteration: 2798
+Line Manager Iteration: 2799
+Line Manager Iteration: 2800
+Line Manager Iteration: 2801
+Line Manager Iteration: 2802
+Line Manager Iteration: 2803
+Line Manager Iteration: 2804
+Line Manager Iteration: 2805
+Line Manager Iteration: 2806
+Line Manager Iteration: 2807
+Line Manager Iteration: 2808
+Line Manager Iteration: 2809
+Line Manager Iteration: 2810
+Line Manager Iteration: 2811
+Line Manager Iteration: 2812
+Line Manager Iteration: 2813
+Line Manager Iteration: 2814
+Line Manager Iteration: 2815
+Line Manager Iteration: 2816
+Line Manager Iteration: 2817
+Line Manager Iteration: 2818
+Line Manager Iteration: 2819
+Line Manager Iteration: 2820
+Line Manager Iteration: 2821
+Line Manager Iteration: 2822
+Line Manager Iteration: 2823
+Line Manager Iteration: 2824
+Line Manager Iteration: 2825
+Line Manager Iteration: 2826
+Line Manager Iteration: 2827
+Line Manager Iteration: 2828
+Line Manager Iteration: 2829
+Line Manager Iteration: 2830
+Line Manager Iteration: 2831
+Line Manager Iteration: 2832
+Line Manager Iteration: 2833
+Line Manager Iteration: 2834
+Line Manager Iteration: 2835
+Line Manager Iteration: 2836
+Line Manager Iteration: 2837
+Line Manager Iteration: 2838
+Line Manager Iteration: 2839
+Line Manager Iteration: 2840
+Line Manager Iteration: 2841
+Line Manager Iteration: 2842
+Line Manager Iteration: 2843
+Line Manager Iteration: 2844
+Line Manager Iteration: 2845
+Line Manager Iteration: 2846
+Line Manager Iteration: 2847
+Line Manager Iteration: 2848
+Line Manager Iteration: 2849
+Line Manager Iteration: 2850
+Line Manager Iteration: 2851
+Line Manager Iteration: 2852
+Line Manager Iteration: 2853
+Line Manager Iteration: 2854
+Line Manager Iteration: 2855
+Line Manager Iteration: 2856
+Line Manager Iteration: 2857
+Line Manager Iteration: 2858
+Line Manager Iteration: 2859
+Line Manager Iteration: 2860
+Line Manager Iteration: 2861
+Line Manager Iteration: 2862
+Line Manager Iteration: 2863
+Line Manager Iteration: 2864
+Line Manager Iteration: 2865
+Line Manager Iteration: 2866
+Line Manager Iteration: 2867
+Line Manager Iteration: 2868
+Line Manager Iteration: 2869
+Line Manager Iteration: 2870
+Line Manager Iteration: 2871
+Line Manager Iteration: 2872
+Line Manager Iteration: 2873
+Line Manager Iteration: 2874
+Line Manager Iteration: 2875
+Line Manager Iteration: 2876
+Line Manager Iteration: 2877
+Line Manager Iteration: 2878
+Line Manager Iteration: 2879
+Line Manager Iteration: 2880
+Line Manager Iteration: 2881
+Line Manager Iteration: 2882
+Line Manager Iteration: 2883
+Line Manager Iteration: 2884
+Line Manager Iteration: 2885
+Line Manager Iteration: 2886
+Line Manager Iteration: 2887
+Line Manager Iteration: 2888
+Line Manager Iteration: 2889
+Line Manager Iteration: 2890
+Line Manager Iteration: 2891
+Line Manager Iteration: 2892
+Line Manager Iteration: 2893
+Line Manager Iteration: 2894
+Line Manager Iteration: 2895
+Line Manager Iteration: 2896
+Line Manager Iteration: 2897
+Line Manager Iteration: 2898
+Line Manager Iteration: 2899
+Line Manager Iteration: 2900
+Line Manager Iteration: 2901
+Line Manager Iteration: 2902
+Line Manager Iteration: 2903
+Line Manager Iteration: 2904
+Line Manager Iteration: 2905
+Line Manager Iteration: 2906
+Line Manager Iteration: 2907
+Line Manager Iteration: 2908
+Line Manager Iteration: 2909
+Line Manager Iteration: 2910
+Line Manager Iteration: 2911
+Line Manager Iteration: 2912
+Line Manager Iteration: 2913
+Line Manager Iteration: 2914
+Line Manager Iteration: 2915
+Line Manager Iteration: 2916
+Line Manager Iteration: 2917
+Line Manager Iteration: 2918
+Line Manager Iteration: 2919
+Line Manager Iteration: 2920
+Line Manager Iteration: 2921
+Line Manager Iteration: 2922
+Line Manager Iteration: 2923
+Line Manager Iteration: 2924
+Line Manager Iteration: 2925
+Line Manager Iteration: 2926
+Line Manager Iteration: 2927
+Line Manager Iteration: 2928
+Line Manager Iteration: 2929
+Line Manager Iteration: 2930
+Line Manager Iteration: 2931
+Line Manager Iteration: 2932
+Line Manager Iteration: 2933
+Line Manager Iteration: 2934
+Line Manager Iteration: 2935
+Line Manager Iteration: 2936
+Line Manager Iteration: 2937
+Line Manager Iteration: 2938
+Line Manager Iteration: 2939
+Line Manager Iteration: 2940
+Line Manager Iteration: 2941
+Line Manager Iteration: 2942
+Line Manager Iteration: 2943
+Line Manager Iteration: 2944
+Line Manager Iteration: 2945
+Line Manager Iteration: 2946
+Line Manager Iteration: 2947
+Line Manager Iteration: 2948
+Line Manager Iteration: 2949
+Line Manager Iteration: 2950
+Line Manager Iteration: 2951
+Line Manager Iteration: 2952
+Line Manager Iteration: 2953
+Line Manager Iteration: 2954
+Line Manager Iteration: 2955
+Line Manager Iteration: 2956
+Line Manager Iteration: 2957
+Line Manager Iteration: 2958
+Line Manager Iteration: 2959
+Line Manager Iteration: 2960
+Line Manager Iteration: 2961
+Line Manager Iteration: 2962
+Line Manager Iteration: 2963
+Line Manager Iteration: 2964
+Line Manager Iteration: 2965
+Line Manager Iteration: 2966
+Line Manager Iteration: 2967
+Line Manager Iteration: 2968
+Line Manager Iteration: 2969
+Line Manager Iteration: 2970
+Line Manager Iteration: 2971
+Line Manager Iteration: 2972
+Line Manager Iteration: 2973
+Line Manager Iteration: 2974
+Line Manager Iteration: 2975
+Line Manager Iteration: 2976
+Line Manager Iteration: 2977
+Line Manager Iteration: 2978
+Line Manager Iteration: 2979
+Line Manager Iteration: 2980
+Line Manager Iteration: 2981
+Line Manager Iteration: 2982
+Line Manager Iteration: 2983
+Line Manager Iteration: 2984
+Line Manager Iteration: 2985
+Line Manager Iteration: 2986
+Line Manager Iteration: 2987
+Line Manager Iteration: 2988
+Line Manager Iteration: 2989
+Line Manager Iteration: 2990
+Line Manager Iteration: 2991
+Line Manager Iteration: 2992
+Line Manager Iteration: 2993
+Line Manager Iteration: 2994
+Line Manager Iteration: 2995
+Line Manager Iteration: 2996
+Line Manager Iteration: 2997
+Line Manager Iteration: 2998
+Line Manager Iteration: 2999
+Line Manager Iteration: 3000
+Line Manager Iteration: 3001
+Line Manager Iteration: 3002
+Line Manager Iteration: 3003
+Line Manager Iteration: 3004
+Line Manager Iteration: 3005
+Line Manager Iteration: 3006
+Line Manager Iteration: 3007
+Line Manager Iteration: 3008
+Line Manager Iteration: 3009
+Line Manager Iteration: 3010
+Line Manager Iteration: 3011
+Line Manager Iteration: 3012
+Line Manager Iteration: 3013
+Line Manager Iteration: 3014
+Line Manager Iteration: 3015
+Line Manager Iteration: 3016
+Line Manager Iteration: 3017
+Line Manager Iteration: 3018
+Line Manager Iteration: 3019
+Line Manager Iteration: 3020
+Line Manager Iteration: 3021
+Line Manager Iteration: 3022
+Line Manager Iteration: 3023
+Line Manager Iteration: 3024
+Line Manager Iteration: 3025
+Line Manager Iteration: 3026
+Line Manager Iteration: 3027
+Line Manager Iteration: 3028
+Line Manager Iteration: 3029
+Line Manager Iteration: 3030
+Line Manager Iteration: 3031
+Line Manager Iteration: 3032
+Line Manager Iteration: 3033
+Line Manager Iteration: 3034
+Line Manager Iteration: 3035
+Line Manager Iteration: 3036
+Line Manager Iteration: 3037
+Line Manager Iteration: 3038
+Line Manager Iteration: 3039
+Line Manager Iteration: 3040
+Line Manager Iteration: 3041
+Line Manager Iteration: 3042
+Line Manager Iteration: 3043
+Line Manager Iteration: 3044
+Line Manager Iteration: 3045
+Line Manager Iteration: 3046
+Line Manager Iteration: 3047
+Line Manager Iteration: 3048
+Line Manager Iteration: 3049
+Line Manager Iteration: 3050
+Line Manager Iteration: 3051
+Line Manager Iteration: 3052
+Line Manager Iteration: 3053
+Line Manager Iteration: 3054
+Line Manager Iteration: 3055
+Line Manager Iteration: 3056
+Line Manager Iteration: 3057
+Line Manager Iteration: 3058
+Line Manager Iteration: 3059
+Line Manager Iteration: 3060
+Line Manager Iteration: 3061
+Line Manager Iteration: 3062
+Line Manager Iteration: 3063
+Line Manager Iteration: 3064
+Line Manager Iteration: 3065
+Line Manager Iteration: 3066
+Line Manager Iteration: 3067
+Line Manager Iteration: 3068
+Line Manager Iteration: 3069
+Line Manager Iteration: 3070
+Line Manager Iteration: 3071
+Line Manager Iteration: 3072
+Line Manager Iteration: 3073
+Line Manager Iteration: 3074
+Line Manager Iteration: 3075
+Line Manager Iteration: 3076
+Line Manager Iteration: 3077
+Line Manager Iteration: 3078
+^C==161422== 
+==161422== Process terminating with default action of signal 2 (SIGINT)
+==161422==    at 0x58A2B9E: __write_nocancel (in /usr/lib64/libc-2.17.so)
+==161422==    by 0x582D2F2: _IO_file_write@@GLIBC_2.2.5 (in /usr/lib64/libc-2.17.so)
+==161422==    by 0x582EB0D: _IO_do_write@@GLIBC_2.2.5 (in /usr/lib64/libc-2.17.so)
+==161422==    by 0x582F002: _IO_file_overflow@@GLIBC_2.2.5 (in /usr/lib64/libc-2.17.so)
+==161422==    by 0x582ABD8: putc (in /usr/lib64/libc-2.17.so)
+==161422==    by 0x4F6F9D1: sputc (streambuf:441)
+==161422==    by 0x4F6F9D1: sputc (streambuf:431)
+==161422==    by 0x4F6F9D1: std::ostream::put(char) (ostream.tcc:168)
+==161422==    by 0x4F6FEBE: std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&) (ostream:736)
+==161422==    by 0x406857: seneca::LineManager::run(std::ostream&) (LineManager.cpp:75)
+==161422==    by 0x40ACCD: main (tester_3_prof.cpp:120)
+==161422== 
+==161422== HEAP SUMMARY:
+==161422==     in use at exit: 84,070 bytes in 85 blocks
+==161422==   total heap usage: 120 allocs, 35 frees, 121,770 bytes allocated
+==161422== 
+==161422== 64 bytes in 1 blocks are still reachable in loss record 1 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405B01: std::__new_allocator<seneca::CustomerOrder*>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x4053C5: allocate (alloc_traits.h:482)
+==161422==    by 0x4053C5: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_map(unsigned long) (stl_deque.h:597)
+==161422==    by 0x404EE0: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:646)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x404B29: __static_initialization_and_destruction_0() (Workstation.cpp:11)
+==161422==    by 0x404B85: _GLOBAL__sub_I__ZN6seneca9g_pendingE (Workstation.cpp:74)
+==161422==    by 0x40C78C: __libc_csu_init (in /home/hllee13/OOP345/W4/ws_tester_3)
+==161422==    by 0x57D54E4: (below main) (in /usr/lib64/libc-2.17.so)
+==161422== 
+==161422== 64 bytes in 1 blocks are still reachable in loss record 2 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405B01: std::__new_allocator<seneca::CustomerOrder*>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x4053C5: allocate (alloc_traits.h:482)
+==161422==    by 0x4053C5: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_map(unsigned long) (stl_deque.h:597)
+==161422==    by 0x404EE0: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:646)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x404B47: __static_initialization_and_destruction_0() (Workstation.cpp:12)
+==161422==    by 0x404B85: _GLOBAL__sub_I__ZN6seneca9g_pendingE (Workstation.cpp:74)
+==161422==    by 0x40C78C: __libc_csu_init (in /home/hllee13/OOP345/W4/ws_tester_3)
+==161422==    by 0x57D54E4: (below main) (in /usr/lib64/libc-2.17.so)
+==161422== 
+==161422== 64 bytes in 1 blocks are still reachable in loss record 3 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405B01: std::__new_allocator<seneca::CustomerOrder*>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x4053C5: allocate (alloc_traits.h:482)
+==161422==    by 0x4053C5: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_map(unsigned long) (stl_deque.h:597)
+==161422==    by 0x404EE0: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:646)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x404B65: __static_initialization_and_destruction_0() (Workstation.cpp:13)
+==161422==    by 0x404B85: _GLOBAL__sub_I__ZN6seneca9g_pendingE (Workstation.cpp:74)
+==161422==    by 0x40C78C: __libc_csu_init (in /home/hllee13/OOP345/W4/ws_tester_3)
+==161422==    by 0x57D54E4: (below main) (in /usr/lib64/libc-2.17.so)
+==161422== 
+==161422== 64 bytes in 1 blocks are still reachable in loss record 4 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x409E5F: std::__new_allocator<seneca::Workstation*>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x409472: allocate (alloc_traits.h:482)
+==161422==    by 0x409472: std::_Vector_base<seneca::Workstation*, std::allocator<seneca::Workstation*> >::_M_allocate(unsigned long) (stl_vector.h:378)
+==161422==    by 0x40BE85: void std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >::_M_realloc_insert<seneca::Workstation*>(__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::Workstation*&&) (vector.tcc:459)
+==161422==    by 0x40BCD3: seneca::Workstation*& std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >::emplace_back<seneca::Workstation*>(seneca::Workstation*&&) (vector.tcc:123)
+==161422==    by 0x40BB87: std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >::push_back(seneca::Workstation*&&) (stl_vector.h:1296)
+==161422==    by 0x40B326: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A5B3: main (tester_3_prof.cpp:62)
+==161422== 
+==161422== 64 bytes in 1 blocks are still reachable in loss record 5 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x409E5F: std::__new_allocator<seneca::Workstation*>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x409472: allocate (alloc_traits.h:482)
+==161422==    by 0x409472: std::_Vector_base<seneca::Workstation*, std::allocator<seneca::Workstation*> >::_M_allocate(unsigned long) (stl_vector.h:378)
+==161422==    by 0x408773: seneca::Workstation** std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >::_M_allocate_and_copy<__gnu_cxx::__normal_iterator<seneca::Workstation* const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > > >(unsigned long, __gnu_cxx::__normal_iterator<seneca::Workstation* const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, __gnu_cxx::__normal_iterator<seneca::Workstation* const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >) (stl_vector.h:1616)
+==161422==    by 0x407EA1: std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >::operator=(std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > const&) (vector.tcc:238)
+==161422==    by 0x40647E: seneca::LineManager::LineManager(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > const&) (LineManager.cpp:17)
+==161422==    by 0x40AB82: main (tester_3_prof.cpp:105)
+==161422== 
+==161422== 85 bytes in 3 blocks are still reachable in loss record 6 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x4030D9: void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) (basic_string.tcc:225)
+==161422==    by 0x4F82002: basic_string (basic_string.h:577)
+==161422==    by 0x4F82002: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::substr(unsigned long, unsigned long) const (basic_string.h:3153)
+==161422==    by 0x402D64: seneca::Utilities::extractToken(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long&, bool&) (Utilities.cpp:34)
+==161422==    by 0x40337F: seneca::Station::Station(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Station.cpp:28)
+==161422==    by 0x40B73D: seneca::Workstation::Workstation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Workstation.h:30)
+==161422==    by 0x40B306: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A589: main (tester_3_prof.cpp:60)
+==161422== 
+==161422== 92 bytes in 4 blocks are still reachable in loss record 7 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x4030D9: void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) (basic_string.tcc:225)
+==161422==    by 0x4F82002: basic_string (basic_string.h:577)
+==161422==    by 0x4F82002: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::substr(unsigned long, unsigned long) const (basic_string.h:3153)
+==161422==    by 0x402D64: seneca::Utilities::extractToken(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long&, bool&) (Utilities.cpp:34)
+==161422==    by 0x40337F: seneca::Station::Station(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Station.cpp:28)
+==161422==    by 0x40B73D: seneca::Workstation::Workstation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Workstation.h:30)
+==161422==    by 0x40B306: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A5B3: main (tester_3_prof.cpp:62)
+==161422== 
+==161422== 165 bytes in 5 blocks are still reachable in loss record 8 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x4030D9: void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag) (basic_string.tcc:225)
+==161422==    by 0x4F82002: basic_string (basic_string.h:577)
+==161422==    by 0x4F82002: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::substr(unsigned long, unsigned long) const (basic_string.h:3153)
+==161422==    by 0x402D03: seneca::Utilities::extractToken(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, unsigned long&, bool&) (Utilities.cpp:30)
+==161422==    by 0x403A7A: seneca::CustomerOrder::CustomerOrder(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (CustomerOrder.cpp:24)
+==161422==    by 0x40B5B1: void loadFromFile<seneca::CustomerOrder>(char const*, std::vector<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >&) (tester_3_prof.cpp:170)
+==161422==    by 0x40A9CB: main (tester_3_prof.cpp:91)
+==161422== 
+==161422== 256 bytes in 4 blocks are still reachable in loss record 9 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405B01: std::__new_allocator<seneca::CustomerOrder*>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x4053C5: allocate (alloc_traits.h:482)
+==161422==    by 0x4053C5: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_map(unsigned long) (stl_deque.h:597)
+==161422==    by 0x404EE0: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:646)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x40B76F: seneca::Workstation::Workstation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Workstation.h:30)
+==161422==    by 0x40B306: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A589: main (tester_3_prof.cpp:60)
+==161422== 
+==161422== 256 bytes in 4 blocks are still reachable in loss record 10 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405B01: std::__new_allocator<seneca::CustomerOrder*>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x4053C5: allocate (alloc_traits.h:482)
+==161422==    by 0x4053C5: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_map(unsigned long) (stl_deque.h:597)
+==161422==    by 0x404EE0: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:646)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x40B76F: seneca::Workstation::Workstation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Workstation.h:30)
+==161422==    by 0x40B306: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A5B3: main (tester_3_prof.cpp:62)
+==161422== 
+==161422== 272 bytes in 5 blocks are still reachable in loss record 11 of 21
+==161422==    at 0x4C2CA43: operator new[](unsigned long) (vg_replace_malloc.c:714)
+==161422==    by 0x403B3A: seneca::CustomerOrder::CustomerOrder(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (CustomerOrder.cpp:29)
+==161422==    by 0x40B5B1: void loadFromFile<seneca::CustomerOrder>(char const*, std::vector<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >&) (tester_3_prof.cpp:170)
+==161422==    by 0x40A9CB: main (tester_3_prof.cpp:91)
+==161422== 
+==161422== 480 bytes in 1 blocks are still reachable in loss record 12 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405EEB: std::__new_allocator<seneca::CustomerOrder>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x40591D: allocate (alloc_traits.h:482)
+==161422==    by 0x40591D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_node() (stl_deque.h:583)
+==161422==    by 0x405428: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_create_nodes(seneca::CustomerOrder**, seneca::CustomerOrder**) (stl_deque.h:684)
+==161422==    by 0x404F36: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:658)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x404B29: __static_initialization_and_destruction_0() (Workstation.cpp:11)
+==161422==    by 0x404B85: _GLOBAL__sub_I__ZN6seneca9g_pendingE (Workstation.cpp:74)
+==161422==    by 0x40C78C: __libc_csu_init (in /home/hllee13/OOP345/W4/ws_tester_3)
+==161422==    by 0x57D54E4: (below main) (in /usr/lib64/libc-2.17.so)
+==161422== 
+==161422== 480 bytes in 1 blocks are still reachable in loss record 13 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405EEB: std::__new_allocator<seneca::CustomerOrder>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x40591D: allocate (alloc_traits.h:482)
+==161422==    by 0x40591D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_node() (stl_deque.h:583)
+==161422==    by 0x405428: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_create_nodes(seneca::CustomerOrder**, seneca::CustomerOrder**) (stl_deque.h:684)
+==161422==    by 0x404F36: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:658)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x404B47: __static_initialization_and_destruction_0() (Workstation.cpp:12)
+==161422==    by 0x404B85: _GLOBAL__sub_I__ZN6seneca9g_pendingE (Workstation.cpp:74)
+==161422==    by 0x40C78C: __libc_csu_init (in /home/hllee13/OOP345/W4/ws_tester_3)
+==161422==    by 0x57D54E4: (below main) (in /usr/lib64/libc-2.17.so)
+==161422== 
+==161422== 480 bytes in 1 blocks are still reachable in loss record 14 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405EEB: std::__new_allocator<seneca::CustomerOrder>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x40591D: allocate (alloc_traits.h:482)
+==161422==    by 0x40591D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_node() (stl_deque.h:583)
+==161422==    by 0x405428: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_create_nodes(seneca::CustomerOrder**, seneca::CustomerOrder**) (stl_deque.h:684)
+==161422==    by 0x404F36: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:658)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x404B65: __static_initialization_and_destruction_0() (Workstation.cpp:13)
+==161422==    by 0x404B85: _GLOBAL__sub_I__ZN6seneca9g_pendingE (Workstation.cpp:74)
+==161422==    by 0x40C78C: __libc_csu_init (in /home/hllee13/OOP345/W4/ws_tester_3)
+==161422==    by 0x57D54E4: (below main) (in /usr/lib64/libc-2.17.so)
+==161422== 
+==161422== 640 bytes in 1 blocks are still reachable in loss record 15 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405EEB: std::__new_allocator<seneca::CustomerOrder>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x40C454: allocate (alloc_traits.h:482)
+==161422==    by 0x40C454: std::_Vector_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate(unsigned long) (stl_vector.h:378)
+==161422==    by 0x40C0DB: void std::vector<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_realloc_insert<seneca::CustomerOrder>(__gnu_cxx::__normal_iterator<seneca::CustomerOrder*, std::vector<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> > >, seneca::CustomerOrder&&) (vector.tcc:459)
+==161422==    by 0x40BDC6: seneca::CustomerOrder& std::vector<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::emplace_back<seneca::CustomerOrder>(seneca::CustomerOrder&&) (vector.tcc:123)
+==161422==    by 0x40BBB9: std::vector<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::push_back(seneca::CustomerOrder&&) (stl_vector.h:1296)
+==161422==    by 0x40B5D5: void loadFromFile<seneca::CustomerOrder>(char const*, std::vector<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >&) (tester_3_prof.cpp:171)
+==161422==    by 0x40A9CB: main (tester_3_prof.cpp:91)
+==161422== 
+==161422== 672 bytes in 4 blocks are still reachable in loss record 16 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x40B2EB: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A589: main (tester_3_prof.cpp:60)
+==161422== 
+==161422== 672 bytes in 4 blocks are still reachable in loss record 17 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x40B2EB: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A5B3: main (tester_3_prof.cpp:62)
+==161422== 
+==161422== 1,632 bytes in 34 blocks are still reachable in loss record 18 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x403B94: seneca::CustomerOrder::CustomerOrder(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (CustomerOrder.cpp:32)
+==161422==    by 0x40B5B1: void loadFromFile<seneca::CustomerOrder>(char const*, std::vector<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >&) (tester_3_prof.cpp:170)
+==161422==    by 0x40A9CB: main (tester_3_prof.cpp:91)
+==161422== 
+==161422== 1,920 bytes in 4 blocks are still reachable in loss record 19 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405EEB: std::__new_allocator<seneca::CustomerOrder>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x40591D: allocate (alloc_traits.h:482)
+==161422==    by 0x40591D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_node() (stl_deque.h:583)
+==161422==    by 0x405428: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_create_nodes(seneca::CustomerOrder**, seneca::CustomerOrder**) (stl_deque.h:684)
+==161422==    by 0x404F36: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:658)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x40B76F: seneca::Workstation::Workstation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Workstation.h:30)
+==161422==    by 0x40B306: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A589: main (tester_3_prof.cpp:60)
+==161422== 
+==161422== 1,920 bytes in 4 blocks are still reachable in loss record 20 of 21
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405EEB: std::__new_allocator<seneca::CustomerOrder>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x40591D: allocate (alloc_traits.h:482)
+==161422==    by 0x40591D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_node() (stl_deque.h:583)
+==161422==    by 0x405428: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_create_nodes(seneca::CustomerOrder**, seneca::CustomerOrder**) (stl_deque.h:684)
+==161422==    by 0x404F36: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:658)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x40B76F: seneca::Workstation::Workstation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Workstation.h:30)
+==161422==    by 0x40B306: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A5B3: main (tester_3_prof.cpp:62)
+==161422== 
+==161422== 73,728 bytes in 1 blocks are still reachable in loss record 21 of 21
+==161422==    at 0x4C2B15C: malloc (vg_replace_malloc.c:431)
+==161422==    by 0x4EE72CD: pool (eh_alloc.cc:235)
+==161422==    by 0x4EE72CD: __static_initialization_and_destruction_0 (eh_alloc.cc:373)
+==161422==    by 0x4EE72CD: _GLOBAL__sub_I_eh_alloc.cc (eh_alloc.cc:456)
+==161422==    by 0x400F9C2: _dl_init (in /usr/lib64/ld-2.17.so)
+==161422==    by 0x4001179: ??? (in /usr/lib64/ld-2.17.so)
+==161422==    by 0x4: ???
+==161422==    by 0x1FFF000226: ???
+==161422==    by 0x1FFF000232: ???
+==161422==    by 0x1FFF000240: ???
+==161422==    by 0x1FFF00024E: ???
+==161422==    by 0x1FFF000261: ???
+==161422== 
+==161422== LEAK SUMMARY:
+==161422==    definitely lost: 0 bytes in 0 blocks
+==161422==    indirectly lost: 0 bytes in 0 blocks
+==161422==      possibly lost: 0 bytes in 0 blocks
+==161422==    still reachable: 84,070 bytes in 85 blocks
+==161422==         suppressed: 0 bytes in 0 blocks
+==161422== 
+==161422== ERROR SUMMARY: 40 errors from 4 contexts (suppressed: 0 from 0)
+==161422== 
+==161422== 4 errors in context 1 of 4:
+==161422== Conditional jump or move depends on uninitialised value(s)
+==161422==    at 0x40407A: seneca::CustomerOrder::isOrderFilled() const (CustomerOrder.cpp:83)
+==161422==    by 0x404984: seneca::Workstation::attemptToMoveOrder() (Workstation.cpp:35)
+==161422==    by 0x4067EF: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}::operator()(seneca::Workstation*) const (LineManager.cpp:86)
+==161422==    by 0x406CF4: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2} std::for_each<__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}>(__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, __gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}) (stl_algo.h:3833)
+==161422==    by 0x4068ED: seneca::LineManager::run(std::ostream&) (LineManager.cpp:85)
+==161422==    by 0x40ACCD: main (tester_3_prof.cpp:120)
+==161422==  Uninitialised value was created by a heap allocation
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405EEB: std::__new_allocator<seneca::CustomerOrder>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x40591D: allocate (alloc_traits.h:482)
+==161422==    by 0x40591D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_node() (stl_deque.h:583)
+==161422==    by 0x405428: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_create_nodes(seneca::CustomerOrder**, seneca::CustomerOrder**) (stl_deque.h:684)
+==161422==    by 0x404F36: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:658)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x40B76F: seneca::Workstation::Workstation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Workstation.h:30)
+==161422==    by 0x40B306: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A5B3: main (tester_3_prof.cpp:62)
+==161422== 
+==161422== 
+==161422== 12 errors in context 2 of 4:
+==161422== Conditional jump or move depends on uninitialised value(s)
+==161422==    at 0x4F7F493: _M_is_local (basic_string.h:264)
+==161422==    by 0x4F7F493: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) (basic_string.h:857)
+==161422==    by 0x403F11: seneca::CustomerOrder::operator=(seneca::CustomerOrder&&) (CustomerOrder.cpp:60)
+==161422==    by 0x403E33: seneca::CustomerOrder::CustomerOrder(seneca::CustomerOrder&&) (CustomerOrder.cpp:47)
+==161422==    by 0x405252: construct<seneca::CustomerOrder, seneca::CustomerOrder> (new_allocator.h:187)
+==161422==    by 0x405252: construct<seneca::CustomerOrder, seneca::CustomerOrder> (alloc_traits.h:537)
+==161422==    by 0x405252: seneca::CustomerOrder& std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::emplace_back<seneca::CustomerOrder>(seneca::CustomerOrder&&) (deque.tcc:170)
+==161422==    by 0x404DA9: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::push_back(seneca::CustomerOrder&&) (stl_deque.h:1554)
+==161422==    by 0x404976: seneca::Workstation::attemptToMoveOrder() (Workstation.cpp:32)
+==161422==    by 0x4067EF: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}::operator()(seneca::Workstation*) const (LineManager.cpp:86)
+==161422==    by 0x406CF4: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2} std::for_each<__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}>(__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, __gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}) (stl_algo.h:3833)
+==161422==    by 0x4068ED: seneca::LineManager::run(std::ostream&) (LineManager.cpp:85)
+==161422==    by 0x40ACCD: main (tester_3_prof.cpp:120)
+==161422==  Uninitialised value was created by a heap allocation
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405EEB: std::__new_allocator<seneca::CustomerOrder>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x40591D: allocate (alloc_traits.h:482)
+==161422==    by 0x40591D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_node() (stl_deque.h:583)
+==161422==    by 0x405428: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_create_nodes(seneca::CustomerOrder**, seneca::CustomerOrder**) (stl_deque.h:684)
+==161422==    by 0x404F36: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:658)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x40B76F: seneca::Workstation::Workstation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Workstation.h:30)
+==161422==    by 0x40B306: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A5B3: main (tester_3_prof.cpp:62)
+==161422== 
+==161422== 
+==161422== 12 errors in context 3 of 4:
+==161422== Conditional jump or move depends on uninitialised value(s)
+==161422==    at 0x4F7F493: _M_is_local (basic_string.h:264)
+==161422==    by 0x4F7F493: std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::operator=(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&&) (basic_string.h:857)
+==161422==    by 0x403EEB: seneca::CustomerOrder::operator=(seneca::CustomerOrder&&) (CustomerOrder.cpp:59)
+==161422==    by 0x403E33: seneca::CustomerOrder::CustomerOrder(seneca::CustomerOrder&&) (CustomerOrder.cpp:47)
+==161422==    by 0x405252: construct<seneca::CustomerOrder, seneca::CustomerOrder> (new_allocator.h:187)
+==161422==    by 0x405252: construct<seneca::CustomerOrder, seneca::CustomerOrder> (alloc_traits.h:537)
+==161422==    by 0x405252: seneca::CustomerOrder& std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::emplace_back<seneca::CustomerOrder>(seneca::CustomerOrder&&) (deque.tcc:170)
+==161422==    by 0x404DA9: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::push_back(seneca::CustomerOrder&&) (stl_deque.h:1554)
+==161422==    by 0x404976: seneca::Workstation::attemptToMoveOrder() (Workstation.cpp:32)
+==161422==    by 0x4067EF: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}::operator()(seneca::Workstation*) const (LineManager.cpp:86)
+==161422==    by 0x406CF4: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2} std::for_each<__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}>(__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, __gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}) (stl_algo.h:3833)
+==161422==    by 0x4068ED: seneca::LineManager::run(std::ostream&) (LineManager.cpp:85)
+==161422==    by 0x40ACCD: main (tester_3_prof.cpp:120)
+==161422==  Uninitialised value was created by a heap allocation
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405EEB: std::__new_allocator<seneca::CustomerOrder>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x40591D: allocate (alloc_traits.h:482)
+==161422==    by 0x40591D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_node() (stl_deque.h:583)
+==161422==    by 0x405428: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_create_nodes(seneca::CustomerOrder**, seneca::CustomerOrder**) (stl_deque.h:684)
+==161422==    by 0x404F36: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:658)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x40B76F: seneca::Workstation::Workstation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Workstation.h:30)
+==161422==    by 0x40B306: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A5B3: main (tester_3_prof.cpp:62)
+==161422== 
+==161422== 
+==161422== 12 errors in context 4 of 4:
+==161422== Conditional jump or move depends on uninitialised value(s)
+==161422==    at 0x4040FB: seneca::CustomerOrder::isItemFilled(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const (CustomerOrder.cpp:91)
+==161422==    by 0x404921: seneca::Workstation::attemptToMoveOrder() (Workstation.cpp:28)
+==161422==    by 0x4067EF: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}::operator()(seneca::Workstation*) const (LineManager.cpp:86)
+==161422==    by 0x406CF4: seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2} std::for_each<__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}>(__gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, __gnu_cxx::__normal_iterator<seneca::Workstation**, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> > >, seneca::LineManager::run(std::ostream&)::{lambda(seneca::Workstation*)#2}) (stl_algo.h:3833)
+==161422==    by 0x4068ED: seneca::LineManager::run(std::ostream&) (LineManager.cpp:85)
+==161422==    by 0x40ACCD: main (tester_3_prof.cpp:120)
+==161422==  Uninitialised value was created by a heap allocation
+==161422==    at 0x4C2B87D: operator new(unsigned long) (vg_replace_malloc.c:472)
+==161422==    by 0x405EEB: std::__new_allocator<seneca::CustomerOrder>::allocate(unsigned long, void const*) (new_allocator.h:147)
+==161422==    by 0x40591D: allocate (alloc_traits.h:482)
+==161422==    by 0x40591D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_allocate_node() (stl_deque.h:583)
+==161422==    by 0x405428: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_create_nodes(seneca::CustomerOrder**, seneca::CustomerOrder**) (stl_deque.h:684)
+==161422==    by 0x404F36: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_M_initialize_map(unsigned long) (stl_deque.h:658)
+==161422==    by 0x404C2D: std::_Deque_base<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::_Deque_base() (stl_deque.h:460)
+==161422==    by 0x404BDB: std::deque<seneca::CustomerOrder, std::allocator<seneca::CustomerOrder> >::deque() (stl_deque.h:855)
+==161422==    by 0x40B76F: seneca::Workstation::Workstation(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) (Workstation.h:30)
+==161422==    by 0x40B306: void loadFromFile<seneca::Workstation>(char const*, std::vector<seneca::Workstation*, std::allocator<seneca::Workstation*> >&) (tester_3_prof.cpp:191)
+==161422==    by 0x40A5B3: main (tester_3_prof.cpp:62)
+==161422== 
+==161422== ERROR SUMMARY: 40 errors from 4 contexts (suppressed: 0 from 0)
+
+Script done on Fri 06 Dec 2024 12:14:44 AM EST

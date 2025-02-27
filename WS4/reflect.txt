@@ -1,0 +1,9 @@
+For the part-3 of workshop 4, run() function and finding the first station in the constructor are so challenging for me.
+
+In parts 1 and 2, Station and CustomerOrder modules helped me understand how inventory and orders work in simple way, giving me the basics for part 3.
+
+For the run() function, to understand this function needed studying the tester file first, then realize that it runs in a while loop, explains why we need a static iteration counter to tracking multiple runs. Also, need to follow strict STL algorithm requirements.
+
+For the constructor, I need to store the address of first station into the m_firstStation attribute, using for each iterates lambda, inside the lambda we find the current/first station using find_if, then find the next station if there have one more stations, and if the next station isn't the last one, point current to it. I use none_of checks for stations to find out which one is first stations by avoiding all the "next" stations. Like: current | next-1 next-1 | next-2 so I think the logic would be like this, looking for the station which didn't appear twice and the first station would never appear after "|".
+
+Originally had issues with infinite loops and memory issues. Fixed by properly checking file opening with !File instead of file.empty(), and by initializing m_firstStation in constructor's init list.
