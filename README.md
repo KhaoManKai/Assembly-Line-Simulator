@@ -1,5 +1,5 @@
 ## Simulators for Assembly Lines
- Completed during the third semester of a collegiate program, this project number 4. 
+ (*Completed during the third semester of a collegiate program, this project number 4.*)
  
  a C++ program using workstations processing consumer orders to replicate an industrial assembly line.
 
