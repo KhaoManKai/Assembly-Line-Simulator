@@ -1,6 +1,6 @@
-For the part-3 of workshop 4, run() function and finding the first station in the constructor are so challenging for me.
+run() function and finding the first station in the constructor are so challenging for me.
 
-In parts 1 and 2, Station and CustomerOrder modules helped me understand how inventory and orders work in simple way, giving me the basics for part 3.
+Station and CustomerOrder modules helped me understand how inventory and orders work in simple way, giving me the basics for part 3.
 
 For the run() function, to understand this function needed studying the tester file first, then realize that it runs in a while loop, explains why we need a static iteration counter to tracking multiple runs. Also, need to follow strict STL algorithm requirements.
 
